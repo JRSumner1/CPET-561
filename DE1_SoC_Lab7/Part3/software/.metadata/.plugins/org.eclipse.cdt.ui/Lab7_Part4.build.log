@@ -1,0 +1,18 @@
+15:08:32 **** Incremental Build of configuration Nios II for project Lab7_Part4 ****
+make all 
+Info: Building ../Lab7_Part4_bsp/
+C:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Lab7_Part4_bsp/
+[BSP build complete]
+Info: Compiling Lab7_Part4.c to obj/default/Lab7_Part4.o
+nios2-elf-gcc -xc -MP -MMD -c -I../Lab7_Part4_bsp//HAL/inc -I../Lab7_Part4_bsp/ -I../Lab7_Part4_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_C_PLUS_PLUS -DALT_NO_INSTRUCTION_EMULATION -DALT_USE_SMALL_DRIVERS -DSMALL_C_LIB -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/Lab7_Part4.o Lab7_Part4.c
+Info: Linking Lab7_Part4.elf
+nios2-elf-g++  -T'../Lab7_Part4_bsp//linker.x' -msys-crt0='../Lab7_Part4_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../Lab7_Part4_bsp/  -msmallc  -Wl,-Map=Lab7_Part4.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o Lab7_Part4.elf obj/default/Lab7_Part4.o -lm -msys-lib=m
+nios2-elf-insert Lab7_Part4.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x9028 --timestamp 1743013979 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name nios_system --quartus_project_dir "S:/CPET_561/DE1_SoC_Lab7/Part3" --jdi ../..//output_files/DE1_SoC_Lab7.jdi --sopcinfo S:/CPET_561/DE1_SoC_Lab7/Part3/software/Lab7_Part4_bsp/../../nios_system.sopcinfo
+Info: (Lab7_Part4.elf) 9496 Bytes program size (code + initialized data).
+Info:                  6164 Bytes free for stack + heap.
+Info: Creating Lab7_Part4.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source Lab7_Part4.elf >Lab7_Part4.objdump
+[Lab7_Part4 build complete]
+
+15:08:34 Build Finished (took 2s.360ms)
+

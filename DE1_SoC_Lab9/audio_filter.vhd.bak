@@ -1,0 +1,130 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_signed.all;
+
+entity audio_filter is
+  port (
+    clock_50  : in std_logic;
+    reset_n   : in std_logic;
+    write     : in std_logic;
+    address   : in std_logic;
+    writedata : in std_logic_vector(15 downto 0) := (others => '0');
+    readdata  : out std_logic_vector(15 downto 0) := (others => '0')
+  );
+end audio_filter;
+
+architecture rtl of audio_filter is
+	component multiplier
+		port (
+			dataa  : in  std_logic_vector(15 downto 0);
+			datab  : in  std_logic_vector(15 downto 0);
+			result : out std_logic_vector(31 downto 0)
+		);
+	end component;
+	
+	constant max_index : integer := 15;
+	
+	type fixed_point_coeffs is array (0 to 16) of std_logic_vector(15 downto 0);
+	signal high_coeffs     : fixed_point_coeffs;
+	signal low_coeffs      : fixed_point_coeffs;
+	signal constant_coeffs : fixed_point_coeffs;
+	
+	type t_array_in is array (0 to 16) of std_logic_vector(15 downto 0);
+	type t_array_out is array (0 to 16) of std_logic_vector(31 downto 0);
+	signal data_signals   : t_array_in;
+	signal result_signals : t_array_out;
+	signal result         : t_array_in;
+
+	signal delay_reg  : t_array_in;
+	signal data_in    : std_logic_vector(15 downto 0);
+	signal filter_en  : std_logic;
+	signal filter_sel : std_logic_vector(15 downto 0);
+begin
+	high_coeffs <= (
+		x"003e", x"ff9a", x"fe9f", x"0000",
+		x"0535", x"05b2", x"f5ac", x"dab7",
+		x"4c91", x"dab7", x"f5ac", x"05b2",
+		x"0525", x"0000", x"fe9f", x"ff9b",
+		x"003e"
+	);
+
+	low_coeffs <= (
+		x"0052", x"00bb", x"01e2", x"0408",
+		x"071b", x"0aad", x"0e11", x"1080",
+		x"1162", x"1080", x"0e11", x"0aad",
+		x"071b", x"0408", x"01e2", x"00bb",
+		x"0052"
+	);
+
+	delay_reg(0) <= data_in;
+
+	filter_en <= write and (not address);
+	
+	data_in_proc : process (clock_50, reset_n)
+	begin
+		if (reset_n = '0') then
+			data_in <= (others => '0');
+		elsif (rising_edge(clock_50)) then
+			if (write = '1') then
+				if (address = '1') then
+					data_in <= writedata;
+				else
+					filter_select <= writedata;
+				end if;
+			end if;
+		end if;
+	end process;
+	
+	constant_coeffs_proc : process(clock_50, reset_n)
+	begin
+		if (reset_n = '0') then
+			constant_coeffs <= (
+			x"0000", x"0000", x"0000", x"0000",
+			x"0000", x"0000", x"0000", x"0000",
+			x"0000", x"0000", x"0000", x"0000",
+			x"0000", x"0000", x"0000", x"0000",
+			x"0000"
+			);
+		elsif (rising_edge(clock_50)) then
+			if (filter_select = x"0000") then
+				constant_coeffs <= low_coeffs;
+			else
+				constant_coeffs <= high_coeffs;
+			end if;
+		end if;
+	end process;
+	
+	shift_gen : for i in 1 to max_index generate
+		shift_reg : process (clock_50, reset_n)
+		begin
+			if (reset_n = '0') then
+				delay_reg(i) <= (others => '0');
+			elsif rising_edge(clock_50) then
+				if (filter_en = '1') then
+					delay_reg(i) <= delay_reg(i - 1);
+				end if;
+			end if;
+		end process;
+	end generate shift_gen;
+
+	multi_gen : for i in 0 to max_index generate
+	begin
+		data_signals(i) <= delay_reg(i);
+		multx : multiplier
+		port map
+		(
+			dataa  => data_signals(i),
+			datab  => constant_coeffs(i),
+			result => result_signals(i)
+		);
+	end generate multi_gen;
+
+	result(0) <= std_logic_vector(signed(result_signals(0)(30 downto 15)));
+	adder_gen : for i in 1 to max_index generate
+	begin
+		result(i) <= std_logic_vector(signed(result(i - 1)) + signed(result_signals(i)(30 downto 15)));
+	end generate adder_gen;
+
+	readdata <= result(max_index);
+end rtl;

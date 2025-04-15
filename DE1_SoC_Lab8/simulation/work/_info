@@ -1,0 +1,180 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA_lite/18.1
+Efilter_tb
+Z0 w1744500485
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z4 dD:/Documents/CPET_561/DE1_SoC_Lab8/simulation
+Z5 8D:/Documents/CPET_561/DE1_SoC_Lab8/simulation/filters_tb.vhd
+Z6 FD:/Documents/CPET_561/DE1_SoC_Lab8/simulation/filters_tb.vhd
+l0
+L6
+VR>XVXSlTllW2TX6ZmYZX^0
+!s100 `mSW6CHL`Y;9A25eBNzOL1
+Z7 OV;C;10.5b;63
+32
+Z8 !s110 1744500942
+!i10b 1
+Z9 !s108 1744500942.000000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Documents/CPET_561/DE1_SoC_Lab8/simulation/filters_tb.vhd|
+Z11 !s107 D:/Documents/CPET_561/DE1_SoC_Lab8/simulation/filters_tb.vhd|
+!i113 1
+Z12 o-work work -2002 -explicit
+Z13 tExplicit 1 CvgOpt 0
+Asim
+R1
+R2
+R3
+DEx4 work 9 filter_tb 0 22 R>XVXSlTllW2TX6ZmYZX^0
+l43
+L9
+Vd^JzG=3RIJ?I8WZaZ7;7;2
+!s100 ;i2T@Q];j8;Cd=TP^hIai0
+R7
+32
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ehigh_pass_filter
+Z14 w1744232122
+Z15 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z16 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+R1
+R2
+R3
+R4
+Z17 8D:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd
+Z18 FD:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd
+l0
+L6
+VkOSP4leTTBb2j3<OARmd43
+!s100 _>nlNcio15o@53n1>2=h?0
+R7
+32
+R8
+!i10b 1
+R9
+Z19 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd|
+Z20 !s107 D:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd|
+!i113 1
+R12
+R13
+Artl
+R15
+R16
+R1
+R2
+R3
+DEx4 work 16 high_pass_filter 0 22 kOSP4leTTBb2j3<OARmd43
+l35
+L16
+VZ>fd8c_LlEY;ZN@7jXG6n2
+!s100 eW_Q::JHUNYJc[cbU9iG;0
+R7
+32
+R8
+!i10b 1
+R9
+R19
+R20
+!i113 1
+R12
+R13
+Elow_pass_filter
+Z21 w1744232145
+R15
+R16
+R1
+R2
+R3
+R4
+Z22 8D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd
+Z23 FD:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd
+l0
+L6
+VCBZZ5NQN3WA_9036:LD@e3
+!s100 3l@AbK5>:[o6G@ETBN2VL2
+R7
+32
+R8
+!i10b 1
+R9
+Z24 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd|
+Z25 !s107 D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd|
+!i113 1
+R12
+R13
+Artl
+R15
+R16
+R1
+R2
+R3
+DEx4 work 15 low_pass_filter 0 22 CBZZ5NQN3WA_9036:LD@e3
+l34
+L16
+V6n8g`0OknF]ak?D79n^Qz0
+!s100 SbaHFM@[XiRA4JhOWYH8_2
+R7
+32
+R8
+!i10b 1
+R9
+R24
+R25
+!i113 1
+R12
+R13
+Emultiplier
+Z26 w1744231217
+R2
+R3
+R4
+Z27 8D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd
+Z28 FD:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd
+l0
+L42
+VI^zOWMf7j;1ZgInoNTE[70
+!s100 e8ON0b?W8fYM;]<nmmZP50
+R7
+32
+R8
+!i10b 1
+R9
+Z29 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd|
+Z30 !s107 D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd|
+!i113 1
+R12
+R13
+Asyn
+R2
+R3
+DEx4 work 10 multiplier 0 22 I^zOWMf7j;1ZgInoNTE[70
+l74
+L52
+V;e4ndn:cTceg4XP1`Y=2;3
+!s100 @RciBKk]K]T`SkW6KHNjP1
+R7
+32
+R8
+!i10b 1
+R9
+R29
+R30
+!i113 1
+R12
+R13

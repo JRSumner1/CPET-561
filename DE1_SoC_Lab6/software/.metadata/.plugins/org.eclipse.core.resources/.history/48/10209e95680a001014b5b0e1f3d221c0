@@ -1,0 +1,167 @@
+/******************************************************************************
+ * File:    Lab6_Part2.c
+ * Author:  Jon Sumner
+ * Date:    March 23, 2025
+ *
+ ******************************************************************************/
+
+#include <stdio.h>
+#include "system.h"
+#include <io.h>                         // For IOWR_8DIRECT() or IOWR_ALTERA_AVALON_PIO_DATA()
+#include "altera_avalon_pio_regs.h"    // For IOWR_ALTERA_AVALON_PIO_DATA()
+
+// Use whichever base addresses make sense for your system
+// According to system.h, the inferred or on-chip RAM might start at 0x0000 or 0x4000.
+// Adjust this to match the memory region you want to test.
+#define TEST_RAM_BASE   0x4000
+#define TEST_RAM_SIZE   256    // Number of bytes to test
+
+// Helper macro to turn on all red LEDs (assuming 8 LEDs)
+#define TURN_ON_RED_LEDS()  IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, 0xFF)
+
+/*******************************************************************************
+ * Function: memory_test_byte
+ *
+ * Description:
+ *   Performs a byte-accessible RAM test. Writes the specified pattern to each
+ *   byte in the given region, then reads back to verify. On failure, turns on
+ *   the red LEDs and halts.
+ *
+ * Parameters:
+ *   startAddr  - Pointer to the start of the test region (byte pointer)
+ *   numBytes   - Number of bytes to test
+ *   testData   - The 8-bit pattern to write
+ *
+ * Returns:
+ *   None (but if a failure occurs, it spins forever with LEDs lit)
+ ******************************************************************************/
+void memory_test_byte(unsigned char *startAddr, unsigned int numBytes, unsigned char testData)
+{
+    unsigned int i;
+
+    // Write phase
+    for (i = 0; i < numBytes; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < numBytes; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+/*******************************************************************************
+ * Function: memory_test_halfword
+ *
+ * Description:
+ *   Performs a 16-bit accessible RAM test. The function divides the test size
+ *   by 2, writes the 16-bit pattern to each halfword, then verifies it.
+ *
+ * Parameters:
+ *   startAddr  - Pointer to the start of the test region (16-bit pointer)
+ *   numBytes   - Number of bytes to test
+ *   testData   - The 16-bit pattern to write
+ *
+ * Returns:
+ *   None (but if a failure occurs, it spins forever with LEDs lit)
+ ******************************************************************************/
+void memory_test_halfword(unsigned short *startAddr, unsigned int numBytes, unsigned short testData)
+{
+    unsigned int i;
+    unsigned int halfwordCount = numBytes / 2;  // Each halfword is 2 bytes
+
+    // Write phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+/*******************************************************************************
+ * Function: memory_test_word
+ *
+ * Description:
+ *   Performs a 32-bit accessible RAM test. The function divides the test size
+ *   by 4, writes the 32-bit pattern to each word, then verifies it.
+ *
+ * Parameters:
+ *   startAddr  - Pointer to the start of the test region (32-bit pointer)
+ *   numBytes   - Number of bytes to test
+ *   testData   - The 32-bit pattern to write
+ *
+ * Returns:
+ *   None (but if a failure occurs, it spins forever with LEDs lit)
+ ******************************************************************************/
+void memory_test_word(unsigned int *startAddr, unsigned int numBytes, unsigned int testData)
+{
+    unsigned int i;
+    unsigned int wordCount = numBytes / 4;  // Each word is 4 bytes
+
+    // Write phase
+    for (i = 0; i < wordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < wordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+/*******************************************************************************
+ * Function: main
+ *
+ * Description:
+ *   Demonstrates a "ramp" test calling the 32-bit test with a 32-bit pattern
+ *   (0x12345678). Adjust the region tested to suit your needs.
+ ******************************************************************************/
+int main(void)
+{
+    printf("Starting 32-bit RAM test with pattern 0x12345678...\n");
+
+    // Call the 32-bit test function
+    memory_test_word(
+        (unsigned int *)TEST_RAM_BASE,     // Start address
+        TEST_RAM_SIZE,                     // Number of bytes to test
+        0x12345678                         // 32-bit pattern
+    );
+
+    printf("32-bit RAM test PASSED.\n");
+
+    // Optionally, demonstrate the 8-bit or 16-bit functions:
+    // memory_test_byte(   (unsigned char *)TEST_RAM_BASE, TEST_RAM_SIZE, 0xAB );
+    // memory_test_halfword((unsigned short *)TEST_RAM_BASE, TEST_RAM_SIZE, 0xABCD);
+
+    // If we reach here, everything passed
+    while (1)
+    {
+        // Main loop (could do more tests or logic)
+    }
+
+    return 0;
+}

@@ -1,0 +1,11 @@
+S:/CPET_561/DE1_SoC_Lab7/raminfr_be.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none S:/CPET_561/DE1_SoC_Lab7/raminfr_be.vhd
+Model Technology ModelSim SE-64 vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity raminfr_be
+-- Compiling architecture rtl of raminfr_be
+
+} {} {}}

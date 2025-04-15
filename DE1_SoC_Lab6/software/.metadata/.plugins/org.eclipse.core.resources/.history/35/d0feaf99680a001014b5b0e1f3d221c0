@@ -1,0 +1,109 @@
+/******************************************************************************
+ * File:    Lab6_Part2.c
+ * Author:  Jon Sumner
+ * Date:    March 23, 2025
+ *
+ ******************************************************************************/
+
+#include <stdio.h>
+#include "system.h"
+#include <io.h>
+#include "altera_avalon_pio_regs.h"
+
+#define TEST_RAM_BASE   0x4000
+#define TEST_RAM_SIZE   256
+
+#define TURN_ON_RED_LEDS()  IOWR_ALTERA_AVALON_PIO_DATA(LEDS_BASE, 0xFF)
+
+void memory_test_byte(unsigned char *startAddr, unsigned int numBytes, unsigned char testData)
+{
+    unsigned int i;
+
+    // Write phase
+    for (i = 0; i < numBytes; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < numBytes; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+void memory_test_halfword(unsigned short *startAddr, unsigned int numBytes, unsigned short testData)
+{
+    unsigned int i;
+    unsigned int halfwordCount = numBytes / 2;  // Each halfword is 2 bytes
+
+    // Write phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+void memory_test_word(unsigned int *startAddr, unsigned int numBytes, unsigned int testData)
+{
+    unsigned int i;
+    unsigned int wordCount = numBytes / 4;  // Each word is 4 bytes
+
+    // Write phase
+    for (i = 0; i < wordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < wordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+            TURN_ON_RED_LEDS();
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+int main(void)
+{
+    printf("Starting 32-bit RAM test with pattern 0x12345678...\n");
+
+    // Call the 32-bit test function
+    memory_test_word(
+        (unsigned int *)TEST_RAM_BASE,     // Start address
+        TEST_RAM_SIZE,                     // Number of bytes to test
+        0x12345678                         // 32-bit pattern
+    );
+
+    printf("32-bit RAM test PASSED.\n");
+
+    // memory_test_byte(   (unsigned char *)TEST_RAM_BASE, TEST_RAM_SIZE, 0xAB );
+    // memory_test_halfword((unsigned short *)TEST_RAM_BASE, TEST_RAM_SIZE, 0xABCD);
+
+    // If we reach here, everything passed
+    while (1)
+    {
+        // Main loop (could do more tests or logic)
+    }
+
+    return 0;
+}

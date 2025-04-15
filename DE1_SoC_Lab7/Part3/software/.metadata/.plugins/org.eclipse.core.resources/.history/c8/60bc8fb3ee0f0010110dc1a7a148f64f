@@ -1,0 +1,167 @@
+/******************************************************************************
+ * File:    Lab7_Part4.c
+ * Author:  Jon Sumner
+ * Date:    March 26, 2025
+ *
+ ******************************************************************************/
+
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include "system.h"
+#include <io.h>
+
+#define PIO_DATA_OFFSET       0
+#define PIO_IRQ_MASK_OFFSET   8
+#define PIO_EDGE_CAP_OFFSET   12
+
+#define RAM_SIZE_BYTES 4096
+#define KEY1_MASK (1 << 1)
+
+bool isFinished = false;
+
+static inline uint32_t pio_read(uint32_t base, uint32_t offset) {
+    return *((volatile uint32_t *)(base + offset));
+}
+static inline void pio_write(uint32_t base, uint32_t offset, uint32_t value) {
+    *((volatile uint32_t *)(base + offset)) = value;
+}
+
+static void key_ISR(void* context)
+{
+    pio_write(KEY_BASE, PIO_EDGE_CAP_OFFSET, 0);
+
+    uint32_t key_val = pio_read(KEY_BASE, PIO_DATA_OFFSET);
+    int key1 = (key_val & 0x02) ? 1 : 0;
+
+    if (key1)
+    {
+        // KEY1 pressed => break out of the loop
+        printf("KEY1 pressed -> stopping RAM tests.\n");
+        *((volatile uint8_t*)LEDS_BASE) = 0xAA;
+    }
+}
+
+void memory_test_byte(unsigned char *startAddr, unsigned int numBytes, unsigned char testData)
+{
+    unsigned int i;
+
+    // Write phase
+    for (i = 0; i < numBytes; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < numBytes; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+        	*((volatile uint8_t*)LEDS_BASE) = 0xFF;
+            printf("ERROR in 8-bit test: address=0x%08X, read=0x%02X, expected=0x%02X\n",
+                   (unsigned)(startAddr + i), startAddr[i], testData);
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+void memory_test_halfword(unsigned short *startAddr, unsigned int numBytes, unsigned short testData)
+{
+    unsigned int i;
+    unsigned int halfwordCount = numBytes / 2;  // Each halfword is 2 bytes
+
+    // Write phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < halfwordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+        	*((volatile uint8_t*)LEDS_BASE) = 0xFF;
+            printf("ERROR in 16-bit test: address=0x%08X, read=0x%04X, expected=0x%04X\n",
+                   (unsigned)(startAddr + i), startAddr[i], testData);
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+void memory_test_word(unsigned int *startAddr, unsigned int numBytes, unsigned int testData)
+{
+    unsigned int i;
+    unsigned int wordCount = numBytes / 4;  // Each word is 4 bytes
+
+    // Write phase
+    for (i = 0; i < wordCount; i++)
+    {
+        startAddr[i] = testData;
+    }
+
+    // Read/verify phase
+    for (i = 0; i < wordCount; i++)
+    {
+        if (startAddr[i] != testData)
+        {
+            // Failure - turn on red LEDs and halt
+        	*((volatile uint8_t*)LEDS_BASE) = 0xFF;
+            printf("ERROR in 32-bit test: address=0x%08X, read=0x%08X, expected=0x%08X\n",
+                   (unsigned)(startAddr + i), startAddr[i], testData);
+            while (1) {;} // Spin here forever
+        }
+    }
+}
+
+int main(void)
+{
+    pio_write(KEY_BASE, PIO_EDGE_CAP_OFFSET, 0);
+    pio_write(KEY_BASE, PIO_IRQ_MASK_OFFSET, 0x1);
+
+	*((volatile uint8_t*)LEDS_BASE) = 0x00;
+
+    while (1)
+    {
+    	printf("Starting 8-bit RAM test with pattern 0x00\n");
+    	memory_test_byte(
+    		(unsigned char *)INFERRED_RAM_BE_0_BASE,
+			RAM_SIZE_BYTES,
+    		0x00
+    	);
+    	printf("8-bit RAM test PASSED.\n");
+    	*((volatile uint8_t*)LEDS_BASE) = 0x00;
+
+    	printf("Starting 16-bit RAM test with pattern 0x1234\n");
+    	memory_test_halfword(
+    		(unsigned short *)INFERRED_RAM_BE_0_BASE,
+			RAM_SIZE_BYTES,
+    		0x1234
+    	);
+    	printf("16-bit RAM test PASSED.\n");
+    	*((volatile uint8_t*)LEDS_BASE) = 0x00;
+
+        printf("Starting 32-bit RAM test with pattern 0xABCDEF90\n");
+        memory_test_word(
+            (unsigned int *)INFERRED_RAM_BE_0_BASE,     // Start address
+			RAM_SIZE_BYTES,                     // Number of bytes to test
+            0xABCDEF90                         // 32-bit pattern
+        );
+        printf("32-bit RAM test PASSED.\n");
+        *((volatile uint8_t*)LEDS_BASE) = 0x00;
+
+        printf("All subtests passed!\n");
+
+        alt_ic_isr_register(
+            KEY_IRQ_INTERRUPT_CONTROLLER_ID,
+            KEY_IRQ,
+            key_ISR,
+            NULL,
+            NULL
+        );
+    }
+
+    return 0;
+}

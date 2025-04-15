@@ -1,0 +1,14 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
+USE ieee.std_logic_signed.ALL;
+
+ENTITY DE1_SoC_Lab8 IS
+  PORT (
+    CLOCK_50  : IN STD_LOGIC;
+    reset_n   : IN STD_LOGIC;
+    filter_en : IN STD_LOGIC;
+    data_in   : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
+    data_out : OUT STD_LOGIC_VECTOR(15 DOWNTO 0)
+  );
+END DE1_SoC_Lab8;

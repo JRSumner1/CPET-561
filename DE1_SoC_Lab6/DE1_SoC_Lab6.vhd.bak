@@ -1,0 +1,7 @@
+entity DE1_SoC_Lab5 is
+	port (
+		CLOCK_50       : in  std_logic;
+		KEY				: in  std_logic_vector(3 downto 0);
+		LEDR				: out std_logic_vector(7 downto 0)
+	);
+end entity DE1_SoC_Lab5;
