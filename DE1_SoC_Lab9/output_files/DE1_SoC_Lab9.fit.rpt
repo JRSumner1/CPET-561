@@ -1,6 +1,6 @@
 Fitter report for DE1_SoC_Lab9
-Sat Apr 12 20:18:54 2025
-Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Tue Apr 15 15:53:00 2025
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 
 
 ---------------------
@@ -66,30 +66,30 @@ refer to the applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Fitter Summary                                                                ;
-+---------------------------------+---------------------------------------------+
-; Fitter Status                   ; Successful - Sat Apr 12 20:18:54 2025       ;
-; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
-; Revision Name                   ; DE1_SoC_Lab9                                ;
-; Top-level Entity Name           ; DE1_SoC_Lab9                                ;
-; Family                          ; Cyclone V                                   ;
-; Device                          ; 5CSEMA5F31C6                                ;
-; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 1,485 / 32,070 ( 5 % )                      ;
-; Total registers                 ; 1991                                        ;
-; Total pins                      ; 106 / 457 ( 23 % )                          ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 543,872 / 4,065,280 ( 13 % )                ;
-; Total RAM Blocks                ; 74 / 397 ( 19 % )                           ;
-; Total DSP Blocks                ; 9 / 87 ( 10 % )                             ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 1 / 6 ( 17 % )                              ;
-; Total DLLs                      ; 0 / 4 ( 0 % )                               ;
-+---------------------------------+---------------------------------------------+
++-----------------------------------------------------------------------------------+
+; Fitter Summary                                                                    ;
++---------------------------------+-------------------------------------------------+
+; Fitter Status                   ; Successful - Tue Apr 15 15:53:00 2025           ;
+; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
+; Revision Name                   ; DE1_SoC_Lab9                                    ;
+; Top-level Entity Name           ; DE1_SoC_Lab9                                    ;
+; Family                          ; Cyclone V                                       ;
+; Device                          ; 5CSEMA5F31C6                                    ;
+; Timing Models                   ; Final                                           ;
+; Logic utilization (in ALMs)     ; 1,485 / 32,070 ( 5 % )                          ;
+; Total registers                 ; 1991                                            ;
+; Total pins                      ; 106 / 457 ( 23 % )                              ;
+; Total virtual pins              ; 0                                               ;
+; Total block memory bits         ; 543,872 / 4,065,280 ( 13 % )                    ;
+; Total RAM Blocks                ; 74 / 397 ( 19 % )                               ;
+; Total DSP Blocks                ; 9 / 87 ( 10 % )                                 ;
+; Total HSSI RX PCSs              ; 0                                               ;
+; Total HSSI PMA RX Deserializers ; 0                                               ;
+; Total HSSI TX PCSs              ; 0                                               ;
+; Total HSSI PMA TX Serializers   ; 0                                               ;
+; Total PLLs                      ; 1 / 6 ( 17 % )                                  ;
+; Total DLLs                      ; 0 / 4 ( 0 % )                                   ;
++---------------------------------+-------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -156,29 +156,23 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 10          ;
 ;                            ;             ;
-; Average used               ; 1.08        ;
-; Maximum used               ; 16          ;
+; Average used               ; 1.07        ;
+; Maximum used               ; 10          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.6%      ;
-;     Processor 3            ;   0.6%      ;
-;     Processor 4            ;   0.5%      ;
-;     Processor 5            ;   0.5%      ;
-;     Processor 6            ;   0.5%      ;
-;     Processor 7            ;   0.5%      ;
-;     Processor 8            ;   0.5%      ;
-;     Processor 9            ;   0.5%      ;
-;     Processor 10           ;   0.5%      ;
-;     Processor 11           ;   0.5%      ;
-;     Processor 12           ;   0.5%      ;
-;     Processor 13           ;   0.5%      ;
-;     Processor 14           ;   0.5%      ;
-;     Processor 15           ;   0.5%      ;
-;     Processor 16           ;   0.5%      ;
+;     Processor 2            ;   0.8%      ;
+;     Processor 3            ;   0.8%      ;
+;     Processor 4            ;   0.8%      ;
+;     Processor 5            ;   0.7%      ;
+;     Processor 6            ;   0.7%      ;
+;     Processor 7            ;   0.7%      ;
+;     Processor 8            ;   0.7%      ;
+;     Processor 9            ;   0.7%      ;
+;     Processor 10           ;   0.7%      ;
 +----------------------------+-------------+
 
 
@@ -1261,7 +1255,7 @@ refer to the applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in D:/Documents/CPET_561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.pin.
+The pin-out file can be found in S:/CPET-561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.pin.
 
 
 +---------------------------------------------------------------------------------------------+
@@ -3827,12 +3821,11 @@ Note: This table only shows the top 100 path(s) that have the largest delay adde
 ; Fitter Messages ;
 +-----------------+
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (20030): Parallel compilation is enabled and will use 10 of the 10 processors detected
 Info (119006): Selected device 5CSEMA5F31C6 for design "DE1_SoC_Lab9"
 Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Info (171003): Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
-Warning (292013): Feature LogicLock is only available with a valid subscription license. You can purchase a software subscription to gain full access to this feature.
 Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Assignment Warnings report for details
 Info (176045): Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
 Info (184020): Starting Fitter periphery placement operations
@@ -4071,77 +4064,77 @@ Warning (15705): Ignored locations or region assignments to the following nodes
     Warning (15706): Node "VGA_R[7]" is assigned to location or region, but does not exist in design
     Warning (15706): Node "VGA_SYNC_N" is assigned to location or region, but does not exist in design
     Warning (15706): Node "VGA_VS" is assigned to location or region, but does not exist in design
-Info (11798): Fitter preparation operations ending: elapsed time is 00:00:10
+Info (11798): Fitter preparation operations ending: elapsed time is 00:00:11
 Info (170189): Fitter placement preparation operations beginning
 Info (14951): The Fitter is using Advanced Physical Optimization.
-Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:52
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:29
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:04
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:03
 Info (170193): Fitter routing operations beginning
 Info (170195): Router estimated average interconnect usage is 1% of the available device resources
     Info (170196): Router estimated peak interconnect usage is 16% of the available device resources in the region that extends from location X22_Y0 to location X32_Y10
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:01:36
-Info (11888): Total time spent on timing analysis during the Fitter is 1.92 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:01:15
+Info (11888): Total time spent on timing analysis during the Fitter is 2.01 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:09
+Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:08
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Warning (169064): Following 39 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
-    Info (169065): Pin GPIO_0[4] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[5] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[6] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[7] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[8] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[9] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[10] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[11] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[12] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[13] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[14] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[15] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[16] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[17] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[18] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[19] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[20] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[21] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[22] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[23] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[24] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[25] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[26] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[27] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[28] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[29] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[30] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[31] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[32] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[33] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[34] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[35] has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin AUD_ADCLRCK has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 22
-    Info (169065): Pin AUD_BCLK has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 23
-    Info (169065): Pin AUD_DACLRCK has a permanently disabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 25
-    Info (169065): Pin GPIO_0[0] has a permanently enabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[1] has a permanently enabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[2] has a permanently enabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-    Info (169065): Pin GPIO_0[3] has a permanently enabled output enable File: D:/Documents/CPET_561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
-Info (144001): Generated suppressed messages file D:/Documents/CPET_561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.fit.smsg
-Info: Quartus Prime Fitter was successful. 0 errors, 163 warnings
-    Info: Peak virtual memory: 8147 megabytes
-    Info: Processing ended: Sat Apr 12 20:18:56 2025
-    Info: Elapsed time: 00:03:55
-    Info: Total CPU time (on all processors): 00:15:40
+    Info (169065): Pin GPIO_0[4] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[5] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[6] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[7] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[8] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[9] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[10] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[11] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[12] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[13] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[14] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[15] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[16] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[17] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[18] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[19] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[20] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[21] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[22] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[23] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[24] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[25] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[26] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[27] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[28] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[29] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[30] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[31] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[32] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[33] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[34] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[35] has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin AUD_ADCLRCK has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 22
+    Info (169065): Pin AUD_BCLK has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 23
+    Info (169065): Pin AUD_DACLRCK has a permanently disabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 25
+    Info (169065): Pin GPIO_0[0] has a permanently enabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[1] has a permanently enabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[2] has a permanently enabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+    Info (169065): Pin GPIO_0[3] has a permanently enabled output enable File: S:/CPET-561/DE1_SoC_Lab9/DE1_SoC_Lab9.vhd Line: 34
+Info (144001): Generated suppressed messages file S:/CPET-561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.fit.smsg
+Info: Quartus Prime Fitter was successful. 0 errors, 162 warnings
+    Info: Peak virtual memory: 7681 megabytes
+    Info: Processing ended: Tue Apr 15 15:53:06 2025
+    Info: Elapsed time: 00:02:56
+    Info: Total CPU time (on all processors): 00:03:46
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in D:/Documents/CPET_561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.fit.smsg.
+The suppressed messages can be found in S:/CPET-561/DE1_SoC_Lab9/output_files/DE1_SoC_Lab9.fit.smsg.
 
 
