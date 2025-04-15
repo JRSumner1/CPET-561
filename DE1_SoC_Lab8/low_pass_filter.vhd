@@ -32,23 +32,23 @@ ARCHITECTURE rtl OF low_pass_filter IS
 
 	SIGNAL delay_reg : t_array_in;
 BEGIN
-	datab_signals(0)  <= X"003E";
-	datab_signals(1)  <= X"FF9A";
-	datab_signals(2)  <= X"FE9F";
-	datab_signals(3)  <= X"0000";
-	datab_signals(4)  <= X"0535";
-	datab_signals(5)  <= X"05B2";
-	datab_signals(6)  <= X"F5AC";
-	datab_signals(7)  <= X"DAB7";
-	datab_signals(8)  <= X"4C91";
-	datab_signals(9)  <= X"DAB7";
-	datab_signals(10) <= X"F5AC";
-	datab_signals(11) <= X"05B2";
-	datab_signals(12) <= X"0525";
-	datab_signals(13) <= X"0000";
-	datab_signals(14) <= X"FE9F";
-	datab_signals(15) <= X"FF9B";
-	datab_signals(16) <= X"003E";
+	datab_signals(0)  <= X"0052";
+	datab_signals(1)  <= X"00BB";
+	datab_signals(2)  <= X"01E2";
+	datab_signals(3)  <= X"0408";
+	datab_signals(4)  <= X"071B";
+	datab_signals(5)  <= X"0AAD";
+	datab_signals(6)  <= X"0E11";
+	datab_signals(7)  <= X"1080";
+	datab_signals(8)  <= X"0E11";
+	datab_signals(9)  <= X"0AAD";
+	datab_signals(10) <= X"071B";
+	datab_signals(11) <= X"0408";
+	datab_signals(12) <= X"01E2";
+	datab_signals(13) <= X"0408";
+	datab_signals(14) <= X"01E2";
+	datab_signals(15) <= X"00BB";
+	datab_signals(16) <= X"0052";
 
 	delay_reg(0) <= data_in;
 

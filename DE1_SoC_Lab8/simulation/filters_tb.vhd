@@ -7,18 +7,7 @@ ENTITY filter_tb IS
 END filter_tb;
 
 ARCHITECTURE sim OF filter_tb IS
---	component low_pass_filter
---		port (
---			CLOCK_50  : in  std_logic;
---			reset_n   : in  std_logic;
---			filter_en : in  std_logic;
---			data_in   : in  std_logic_vector(15 downto 0);
---			data_out  : out std_logic_vector(15 downto 0)
---		);
---	end component;
-
-	-- High‑pass FIR
-	component high_pass_filter
+	component low_pass_filter
 		port (
 			CLOCK_50  : in  std_logic;
 			reset_n   : in  std_logic;
@@ -27,6 +16,17 @@ ARCHITECTURE sim OF filter_tb IS
 			data_out  : out std_logic_vector(15 downto 0)
 		);
 	end component;
+
+	-- High‑pass FIR
+--	component high_pass_filter
+--		port (
+--			CLOCK_50  : in  std_logic;
+--			reset_n   : in  std_logic;
+--			filter_en : in  std_logic;
+--			data_in   : in  std_logic_vector(15 downto 0);
+--			data_out  : out std_logic_vector(15 downto 0)
+--		);
+--	end component;
 
 	CONSTANT period  : TIME := 20 ns;
 	SIGNAL CLOCK_50  : STD_LOGIC                     := '0';
@@ -41,7 +41,7 @@ ARCHITECTURE sim OF filter_tb IS
 	SIGNAL sim_done : BOOLEAN := false;
 
 BEGIN
-	uut : high_pass_filter
+	uut : low_pass_filter
 	PORT MAP
 	(
 		CLOCK_50  => CLOCK_50,

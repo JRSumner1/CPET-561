@@ -1,16 +1,4 @@
-|DE1_SoC_Lab8
-CLOCK_50 => low_pass_filter:my_fir_filter.CLOCK_50
-CLOCK_50 => reset_n.CLK
-CLOCK_50 => key0_d3.CLK
-CLOCK_50 => key0_d2.CLK
-CLOCK_50 => key0_d1.CLK
-KEY[0] => key0_d1.DATAIN
-KEY[1] => ~NO_FANOUT~
-KEY[2] => ~NO_FANOUT~
-KEY[3] => ~NO_FANOUT~
-
-
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter
+|low_pass_filter
 CLOCK_50 => delay_reg[16][0].CLK
 CLOCK_50 => delay_reg[16][1].CLK
 CLOCK_50 => delay_reg[16][2].CLK
@@ -829,7 +817,7 @@ data_out[14] <= Add15.DB_MAX_OUTPUT_PORT_TYPE
 data_out[15] <= Add15.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:0:MULTX
+|low_pass_filter|multiplier:\multi_gen:0:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -896,7 +884,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:0:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:0:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -968,7 +956,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:0:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:0:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -1035,7 +1023,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:1:MULTX
+|low_pass_filter|multiplier:\multi_gen:1:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -1102,7 +1090,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:1:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:1:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -1174,7 +1162,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:1:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:1:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -1241,7 +1229,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:2:MULTX
+|low_pass_filter|multiplier:\multi_gen:2:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -1308,7 +1296,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:2:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:2:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -1380,7 +1368,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:2:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:2:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -1447,7 +1435,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:3:MULTX
+|low_pass_filter|multiplier:\multi_gen:3:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -1514,7 +1502,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:3:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:3:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -1586,7 +1574,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:3:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:3:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -1653,7 +1641,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:4:MULTX
+|low_pass_filter|multiplier:\multi_gen:4:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -1720,7 +1708,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:4:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:4:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -1792,7 +1780,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:4:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:4:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -1859,7 +1847,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:5:MULTX
+|low_pass_filter|multiplier:\multi_gen:5:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -1926,7 +1914,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:5:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:5:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -1998,7 +1986,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:5:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:5:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -2065,7 +2053,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:6:MULTX
+|low_pass_filter|multiplier:\multi_gen:6:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -2132,7 +2120,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:6:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:6:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -2204,7 +2192,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:6:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:6:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -2271,7 +2259,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:7:MULTX
+|low_pass_filter|multiplier:\multi_gen:7:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -2338,7 +2326,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:7:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:7:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -2410,7 +2398,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:7:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:7:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -2477,7 +2465,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:8:MULTX
+|low_pass_filter|multiplier:\multi_gen:8:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -2544,7 +2532,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:8:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:8:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -2616,7 +2604,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:8:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:8:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -2683,7 +2671,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:9:MULTX
+|low_pass_filter|multiplier:\multi_gen:9:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -2750,7 +2738,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:9:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:9:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -2822,7 +2810,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:9:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:9:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -2889,7 +2877,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:10:MULTX
+|low_pass_filter|multiplier:\multi_gen:10:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -2956,7 +2944,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:10:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:10:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -3028,7 +3016,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:10:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:10:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -3095,7 +3083,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:11:MULTX
+|low_pass_filter|multiplier:\multi_gen:11:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -3162,7 +3150,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:11:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:11:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -3234,7 +3222,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:11:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:11:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -3301,7 +3289,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:12:MULTX
+|low_pass_filter|multiplier:\multi_gen:12:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -3368,7 +3356,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:12:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:12:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -3440,7 +3428,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:12:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:12:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -3507,7 +3495,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:13:MULTX
+|low_pass_filter|multiplier:\multi_gen:13:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -3574,7 +3562,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:13:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:13:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -3646,7 +3634,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:13:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:13:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -3713,7 +3701,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:14:MULTX
+|low_pass_filter|multiplier:\multi_gen:14:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -3780,7 +3768,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:14:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:14:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -3852,7 +3840,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:14:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:14:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -3919,7 +3907,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:15:MULTX
+|low_pass_filter|multiplier:\multi_gen:15:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -3986,7 +3974,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:15:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:15:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -4058,7 +4046,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:15:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:15:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13
@@ -4125,7 +4113,7 @@ result[30] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 result[31] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:16:MULTX
+|low_pass_filter|multiplier:\multi_gen:16:MULTX
 dataa[0] => lpm_mult:lpm_mult_component.dataa[0]
 dataa[1] => lpm_mult:lpm_mult_component.dataa[1]
 dataa[2] => lpm_mult:lpm_mult_component.dataa[2]
@@ -4192,7 +4180,7 @@ result[30] <= lpm_mult:lpm_mult_component.result[30]
 result[31] <= lpm_mult:lpm_mult_component.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:16:MULTX|lpm_mult:lpm_mult_component
+|low_pass_filter|multiplier:\multi_gen:16:MULTX|lpm_mult:lpm_mult_component
 dataa[0] => mult_71n:auto_generated.dataa[0]
 dataa[1] => mult_71n:auto_generated.dataa[1]
 dataa[2] => mult_71n:auto_generated.dataa[2]
@@ -4264,7 +4252,7 @@ result[30] <= mult_71n:auto_generated.result[30]
 result[31] <= mult_71n:auto_generated.result[31]
 
 
-|DE1_SoC_Lab8|low_pass_filter:my_fir_filter|multiplier:\multi_gen:16:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
+|low_pass_filter|multiplier:\multi_gen:16:MULTX|lpm_mult:lpm_mult_component|mult_71n:auto_generated
 dataa[0] => Mult0.IN15
 dataa[1] => Mult0.IN14
 dataa[2] => Mult0.IN13

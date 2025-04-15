@@ -1,4 +1,23 @@
-D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd
+S:/CPET_561/DE1_SoC_Lab8/multiplier.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none S:/CPET_561/DE1_SoC_Lab8/multiplier.vhd
+Model Technology ModelSim SE-64 vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity multiplier
+-- Compiling architecture SYN of multiplier
+
+} {} {}} S:/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none S:/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd
+Model Technology ModelSim SE-64 vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_SIGNED
+-- Compiling entity high_pass_filter
+-- Compiling architecture rtl of high_pass_filter
+
+} {} {}} D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Documents/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -18,13 +37,16 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Compiling entity filter_tb
 -- Compiling architecture sim of filter_tb
 
-} {} {}} D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd
-Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+} {} {}} S:/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none S:/CPET_561/DE1_SoC_Lab8/low_pass_filter.vhd
+Model Technology ModelSim SE-64 vcom 2019.2 Compiler 2019.04 Apr 17 2019
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling entity multiplier
--- Compiling architecture SYN of multiplier
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_SIGNED
+-- Compiling entity low_pass_filter
+-- Compiling architecture rtl of low_pass_filter
 
 } {} {}} D:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Documents/CPET_561/DE1_SoC_Lab8/high_pass_filter.vhd
 Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
@@ -36,5 +58,22 @@ Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  
 -- Loading package STD_LOGIC_SIGNED
 -- Compiling entity high_pass_filter
 -- Compiling architecture rtl of high_pass_filter
+
+} {} {}} D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd {1 {vcom -work work -2002 -explicit -stats=none D:/Documents/CPET_561/DE1_SoC_Lab8/multiplier.vhd
+Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity multiplier
+-- Compiling architecture SYN of multiplier
+
+} {} {}} S:/CPET_561/DE1_SoC_Lab8/simulation/filters_tb.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {S:\CPET_561\DE1_SoC_Lab8\simulation\filters_tb.vhd}
+Model Technology ModelSim SE-64 vcom 2019.2 Compiler 2019.04 Apr 17 2019
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity filter_tb
+-- Compiling architecture sim of filter_tb
 
 } {} {}}
