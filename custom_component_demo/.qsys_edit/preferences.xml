@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="143" />
+   <irq preferredWidth="34" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library/Interface Protocols,Project/ESDI_IP,Library/Interface Protocols/Serial,Library/Basic Functions/Simulation; Debug and Verification,Library/Basic Functions,Library/Basic Functions/Simulation; Debug and Verification/Debug and Performance,Library,Project" />
+ <window width="1294" height="1399" x="1273" y="0" />
+ <generation synthesis="VHDL" />
+</preferences>
