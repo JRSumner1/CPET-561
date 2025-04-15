@@ -1,0 +1,18 @@
+15:10:21 **** Incremental Build of configuration Nios II for project int_demo ****
+make all 
+Info: Building ../int_demo_bsp/
+C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../int_demo_bsp/
+[BSP build complete]
+Info: Compiling int_demo.c to obj/default/int_demo.o
+nios2-elf-gcc -xc -MP -MMD -c -I../int_demo_bsp//HAL/inc -I../int_demo_bsp/ -I../int_demo_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/int_demo.o int_demo.c
+Info: Linking int_demo.elf
+nios2-elf-g++  -T'../int_demo_bsp//linker.x' -msys-crt0='../int_demo_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../int_demo_bsp/   -Wl,-Map=int_demo.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o int_demo.elf obj/default/int_demo.o -lm -msys-lib=m
+nios2-elf-insert int_demo.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 0 --sidp 0x21010 --timestamp 1738608670 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name nios_system --quartus_project_dir "D:/Documents/CPET_561/int_demo" --jdi ../..//output_files/int_demo.jdi --sopcinfo D:/Documents/CPET_561/int_demo/software/int_demo_bsp/../../nios_system.sopcinfo
+Info: (int_demo.elf) 15 KBytes program size (code + initialized data).
+Info:                11 KBytes free for stack + heap.
+Info: Creating int_demo.objdump
+nios2-elf-objdump --disassemble --syms --all-header --source int_demo.elf >int_demo.objdump
+[int_demo build complete]
+
+15:10:23 Build Finished (took 2s.624ms)
+
