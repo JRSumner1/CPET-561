@@ -1,0 +1,6 @@
+21:15:19 **** Clean-only build of configuration Nios II for project Arbitration_Demo ****
+make clean 
+[Arbitration_Demo clean complete]
+
+21:15:19 Build Finished (took 140ms)
+
