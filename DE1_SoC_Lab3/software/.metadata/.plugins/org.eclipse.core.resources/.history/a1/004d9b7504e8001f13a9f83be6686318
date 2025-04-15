@@ -1,0 +1,67 @@
+#include "system.h"
+#include <stdint.h>
+
+/* Same seven-segment patterns as in lab2.s (for digits 0 through 9) */
+static const uint8_t seven_seg_table[10] = {
+    0x40,  /* 0 */
+    0x79,  /* 1 */
+    0x24,  /* 2 */
+    0x30,  /* 3 */
+    0x19,  /* 4 */
+    0x12,  /* 5 */
+    0x02,  /* 6 */
+    0x78,  /* 7 */
+    0x00,  /* 8 */
+    0x18   /* 9 */
+};
+
+int main(void)
+{
+    /* 'count' holds the current digit [0..9] displayed on HEX0 */
+    int count = 0;
+
+    /* Initialize HEX0 display to digit 0 */
+    *(volatile uint8_t *)HEX0_BASE = seven_seg_table[count];
+
+    while (1)
+    {
+        /* Read the pushbutton register (1 byte) */
+        uint8_t buttons = *BUTTONS_BASE;
+
+        /* Check if KEY1 (bit 1) is pressed => (buttons & 0x02) == 0 */
+        if ((buttons & 0x02) == 0)
+        {
+            /* Read SW0 (bit 0) */
+            uint8_t sw = *SWITCHES_BASE & 0x01;
+
+            if (sw)
+            {
+                /* SW0 = 1 => increment with wrap 9 -> 0 */
+                if (count == 9)
+                    count = 0;
+                else
+                    count++;
+            }
+            else
+            {
+                /* SW0 = 0 => decrement with wrap 0 -> 9 */
+                if (count == 0)
+                    count = 9;
+                else
+                    count--;
+            }
+
+            /* Update HEX0 display with the new 'count' */
+            *HEX0_BASE = seven_seg_table[count];
+
+            /* Wait until KEY1 is released (bit 1 == 1) */
+            do {
+                buttons = *BUTTONS_BASE;
+            } while ((buttons & 0x02) == 0);
+        }
+
+        /* If KEY1 is not pressed, just loop back and keep polling */
+    }
+
+    return 0;  /* Not reached */
+}

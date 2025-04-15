@@ -1,0 +1,57 @@
+#include <stdint.h>
+#include "system.h"
+
+static const uint8_t seven_seg_table[10] = {
+    0x40, /* 0 */
+    0x79, /* 1 */
+    0x24, /* 2 */
+    0x30, /* 3 */
+    0x19, /* 4 */
+    0x12, /* 5 */
+    0x02, /* 6 */
+    0x78, /* 7 */
+    0x00, /* 8 */
+    0x18  /* 9 */
+};
+
+int main(void)
+{
+    int count = 0;
+
+    *(volatile uint8_t *)HEX0_BASE = seven_seg_table[count];
+
+    while (1)
+    {
+        uint8_t buttons = *(volatile uint8_t *)PUSHBUTTONS_BASE;
+
+        if ((buttons & 0x02) == 0)
+        {
+            uint8_t switches = *(volatile uint8_t *)SWITCHES_BASE;
+            uint8_t sw0 = switches & 0x01;
+
+            if (sw0)
+            {
+                if (count == 9)
+                    count = 0;
+                else
+                    count++;
+            }
+            else
+            {
+                if (count == 0)
+                    count = 9;
+                else
+                    count--;
+            }
+
+            *(volatile uint8_t *)HEX0_BASE = seven_seg_table[count];
+
+            do {
+                buttons = *(volatile uint8_t *)PUSHBUTTONS_BASE;
+            } while ((buttons & 0x02) == 0);
+        }
+
+    }
+
+    return 0;
+}

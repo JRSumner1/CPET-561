@@ -1,0 +1,107 @@
+#include <stdint.h>
+#include "system.h"           // Provides PUSHBUTTONS_BASE, SWITCHES_BASE, HEX0_BASE, etc.
+#include "sys/alt_irq.h"      // For alt_ic_isr_register
+
+/*--------------------------------------------------
+   PIO REGISTER OFFSETS (for altera_avalon_pio)
+   Data Sheet:
+     - 0: Data
+     - 4: Direction
+     - 8: Interrupt Mask
+     - 12: Edge Capture
+----------------------------------------------------*/
+#define PIO_DATA_OFFSET       0
+#define PIO_IRQ_MASK_OFFSET   8
+#define PIO_EDGE_CAP_OFFSET   12
+
+/*--------------------------------------------------
+   READ/WRITE HELPERS (32-bit). For 8-bit PIO, we’ll
+   still use 32-bit accesses, but only the LSB is used.
+----------------------------------------------------*/
+static inline uint32_t pio_read(uint32_t base, uint32_t offset) {
+    return *((volatile uint32_t *)(base + offset));
+}
+
+static inline void pio_write(uint32_t base, uint32_t offset, uint32_t value) {
+    *((volatile uint32_t *)(base + offset)) = value;
+}
+
+/*--------------------------------------------------
+  7-SEGMENT TABLE FOR DIGITS [0..9]
+  (Adjust if your hardware wiring differs)
+----------------------------------------------------*/
+static const uint8_t seven_seg_table[10] = {
+    0x3F,  // 0
+    0x06,  // 1
+    0x5B,  // 2
+    0x4F,  // 3
+    0x66,  // 4
+    0x6D,  // 5
+    0x7D,  // 6
+    0x07,  // 7
+    0x7F,  // 8
+    0x6F   // 9
+};
+
+/*--------------------------------------------------
+   GLOBAL VARIABLE: The digit displayed on HEX0
+----------------------------------------------------*/
+volatile int g_count = 0;
+
+/*--------------------------------------------------
+   ISR: PUSHBUTTONS
+   - Clears edge capture
+   - Reads SW0 to decide increment or decrement g_count
+   - Updates HEX0
+----------------------------------------------------*/
+static void pushbutton_ISR(void *context)
+{
+    // Clear pending edge capture so it doesn't re-trigger immediately
+    pio_write(PUSHBUTTONS_BASE, PIO_EDGE_CAP_OFFSET, 0);
+
+    // Read SW0 (bit 0)
+    uint32_t sw_val = pio_read(SWITCHES_BASE, PIO_DATA_OFFSET);
+    int sw0 = (sw_val & 0x01) ? 1 : 0;
+
+    // Increment if SW0=1 and count<9, else decrement if SW0=0 and count>0
+    if (sw0) {
+        if (g_count < 9) {
+            g_count++;
+        }
+    } else {
+        if (g_count > 0) {
+            g_count--;
+        }
+    }
+
+    // Update HEX0 (only LSB used, but we write 8 bits)
+    *((volatile uint8_t *)HEX0_BASE) = seven_seg_table[g_count];
+}
+
+int main(void)
+{
+    // 1) Initialize HEX0 to 0
+    g_count = 0;
+    *((volatile uint8_t *)HEX0_BASE) = seven_seg_table[g_count];
+
+    // 2) Clear any pending pushbutton edges
+    pio_write(PUSHBUTTONS_BASE, PIO_EDGE_CAP_OFFSET, 0);
+
+    // 3) Enable interrupt for KEY1 only => bit 1 => mask=0x2
+    pio_write(PUSHBUTTONS_BASE, PIO_IRQ_MASK_OFFSET, 0x2);
+
+    // 4) Register the ISR
+    alt_ic_isr_register(
+        PUSHBUTTONS_IRQ_INTERRUPT_CONTROLLER_ID,
+        PUSHBUTTONS_IRQ,
+        pushbutton_ISR,
+        NULL,
+        NULL
+    );
+
+    // 5) Main loop does nothing; all logic is in the ISR
+    while (1) {
+        // Could do other tasks here
+    }
+    return 0;
+}

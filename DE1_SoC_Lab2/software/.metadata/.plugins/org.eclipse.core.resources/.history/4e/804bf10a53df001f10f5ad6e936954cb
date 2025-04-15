@@ -1,0 +1,95 @@
+/*
+ * lab2.s
+ *
+ *  Created on: Jan 22, 2025
+ *      Author: Jon Sumner
+ */
+
+.text
+
+.macro MOVIA reg, addr
+	movhi   \reg, %hi(\addr)
+	ori     \reg, \reg, %lo(\addr)
+.endm
+
+// Constant addresses for NIOS 2 components
+.equ Buttons, 0x21000
+.equ Switches, 0x21020
+.equ Hex0, 0x21010
+
+// Seven Seg Display data segments
+.data
+.align 1
+seven_seg_table:
+	.byte 0x40  # 0
+	.byte 0x79  # 1
+	.byte 0x24  # 2
+	.byte 0x30  # 3
+	.byte 0x19  # 4
+	.byte 0x12  # 5
+	.byte 0x02  # 6
+	.byte 0x78  # 7
+	.byte 0x00  # 8
+	.byte 0x18  # 9
+.text
+
+.global main
+main:
+    MOVIA r2, Buttons // Load address of buttons
+    MOVIA r3, Switches // Load address of switches
+    MOVIA r4, Hex0 // Load address of hex display
+    MOVIA r5, seven_seg_table // address of the seven_seg_table
+
+    movi r6, 0 // initialize counter (r0) to 0
+    call display_digit // display initial count (0)
+
+main_loop:
+    ldbio r7, 0(r2) // read buttons
+    andi r8, r7, 0x02 // ioslate button 1 by anding with binary 2
+    beq r8, zero, key1_pressed // if button is pressed, check key
+
+    br main_loop // if button is not pressed, loop
+
+key1_pressed:
+    ldbio r9, 0(r3) // load switches and read 1 byte
+    andi r9, r9, 0x01 // ioslate switch 0 by anding with binary 1
+    beq r9, zero, do_decrement // check if switch is in decrement (low) else increment (high)
+
+// incrementing with wrapper
+do_increment:
+    movi r10, 9 // check if counter = 9
+    beq r6, r10, inc_wrap // if r6 == 9, wrap to 0 
+    addi r6, r6, 1 // else increment counter by 1
+    br update_display // call update_display
+inc_wrap:
+    movi r6, 0 // set counter back to 0
+    br update_display // call update_display
+    
+// decrementing with wrapper
+do_decrement:
+    beq r6, zero, dec_wrap // if r6 == 0, wrap to 9
+    subi r6, r6, 1 // else decrement counter by 1
+    br update_display // call update_display
+dec_wrap:
+    movi r6, 9 // set counter back to 9
+    br update_display // call update_display
+    
+// updates hex0 display and waits for button 1 to be released
+update_display:
+    call display_digit
+    call wait_key1_release
+    br main_loop // returns to main loop
+
+display_digit:
+    add r8, r5, r6 // address in seven_seg_table for digit r0
+    ldb r9, 0(r8) // load seven-seg bits
+    stbio r9, 0(r4) // write to hex0
+    ret // returns to update_display
+
+// waits until button 1 is released
+wait_key1_release:
+wait_loop:
+    ldbio r7, 0(r2) // read buttons
+    andi r7, r7, 0x02 // ioslate button 1 by anding with binary 2
+    beq r7, zero, wait_loop // if button is not released, continue loop
+    ret // return to update_display

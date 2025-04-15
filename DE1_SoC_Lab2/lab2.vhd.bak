@@ -1,0 +1,78 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+------------------------------------------------------------------------
+--  Entity Declaration for your top-level
+------------------------------------------------------------------------
+entity lab2 is
+    port (
+        -- Clock Input (50 MHz on DE1-SoC)
+        CLOCK_50       : in  std_logic;
+        
+        -- Pushbuttons (KEY) on DE1-SoC, 4 bits
+        KEY            : in  std_logic_vector(3 downto 0);
+        
+        -- Switches (SW) on DE1-SoC, typically 10 bits
+        SW             : in  std_logic_vector(9 downto 0);
+        
+        -- Seven-segment display output (just HEX0 for this lab)
+        HEX0           : out std_logic_vector(6 downto 0)
+        
+        -- If needed, you may expose other signals (LEDs, other HEX displays, etc.)
+        -- LEDR, HEX1..HEX5, etc.
+    );
+end entity lab2;
+
+------------------------------------------------------------------------
+--  Architecture: Instantiation of nios_system
+------------------------------------------------------------------------
+architecture rtl of lab2 is
+
+    --------------------------------------------------------------------
+    -- Component Declaration: from nios_system_inst.vhd
+    --------------------------------------------------------------------
+    component nios_system
+        port (
+            -- Clock and Reset
+            clk_clk         : in  std_logic;
+            reset_reset_n   : in  std_logic;
+            
+            -- PIOs for keys, switches, hex0, etc.
+            key_export      : in  std_logic_vector(3 downto 0);
+            sw_export       : in  std_logic_vector(9 downto 0);
+            hex0_export     : out std_logic_vector(6 downto 0);
+            
+            -- If you added JTAG UART, SysID, etc., these also appear here
+            -- jtag_uart_0_avalon_jtag_slave_* ...
+            -- sysid_qsys_0_control_slave_* ...
+        );
+    end component;
+
+begin
+
+    --------------------------------------------------------------------
+    -- Instantiate the nios_system
+    --------------------------------------------------------------------
+    u0 : nios_system
+        port map (
+            -- Connect the top-level CLOCK_50 to the Nios system clock
+            clk_clk       => CLOCK_50,
+
+            -- Typically, the DE1-SoC reset is active-low on KEY(0).
+            -- (Check your lab instructions if using a different reset scheme.)
+            reset_reset_n => KEY(0),
+
+            -- Connect the PIO for pushbuttons (4 bits wide)
+            key_export    => KEY,
+
+            -- Connect the PIO for switches (10 bits wide)
+            sw_export     => SW,
+
+            -- Connect the PIO output for HEX0
+            hex0_export   => HEX0
+
+            -- If you have other signals, map them as well.
+        );
+
+end architecture rtl;

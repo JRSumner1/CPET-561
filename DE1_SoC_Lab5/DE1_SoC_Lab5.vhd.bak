@@ -1,0 +1,37 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity DE1_SoC_Lab5 is
+	port (
+		CLOCK_50       : in  std_logic;
+		KEY				: in  std_logic_vector(3 downto 0);
+		GPIO_0			: out std_logic_vector(35 downto 0)
+	);
+end entity DE1_SoC_Lab5;
+
+architecture rtl of DE1_SoC_Lab5 is
+	component servo_controller is
+		port (
+			clk              : in  std_logic;
+			reset_n          : in  std_logic;
+			write            : in  std_logic;
+			address          : in  std_logic;
+			writedata        : in  std_logic_vector(31 downto 0);
+			outwave_export   : out std_logic;
+			interrupt_sender : out std_logic
+		);
+	end component servo_controller;
+begin
+	u0: component servo_controller
+		port map (
+			clk => CLOCK_50,
+			reset_n => KEY(0),
+			outwave_export => GPIO_0(0),
+			write => '1',
+			address => '0',
+			interrupt_sender => open,
+			writedata => x"0000C350"
+		);
+end architecture rtl;
+			

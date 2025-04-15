@@ -1,0 +1,23 @@
+
+State Machine - |DE1_SoC_Lab5|servo_controller:u_servo_controller|fsm_state
+Name fsm_state.INT_LEFT fsm_state.INT_RIGHT fsm_state.SWEEP_LEFT fsm_state.SWEEP_RIGHT 
+fsm_state.SWEEP_RIGHT 0 0 0 0 
+fsm_state.SWEEP_LEFT 0 0 1 1 
+fsm_state.INT_RIGHT 0 1 0 1 
+fsm_state.INT_LEFT 1 0 0 1 
+
+State Machine - |DE1_SoC_Lab5|nios_system:u_nios_system|servo_controller:servo_controller_0|fsm_state
+Name fsm_state.INT_LEFT fsm_state.INT_RIGHT fsm_state.SWEEP_LEFT fsm_state.SWEEP_RIGHT 
+fsm_state.SWEEP_RIGHT 0 0 0 0 
+fsm_state.SWEEP_LEFT 0 0 1 1 
+fsm_state.INT_RIGHT 0 1 0 1 
+fsm_state.INT_LEFT 1 0 0 1 
+
+State Machine - |DE1_SoC_Lab5|nios_system:u_nios_system|nios_system_nios2_gen2_0:nios2_gen2_0|nios_system_nios2_gen2_0_cpu:cpu|nios_system_nios2_gen2_0_cpu_nios2_oci:the_nios_system_nios2_gen2_0_cpu_nios2_oci|nios_system_nios2_gen2_0_cpu_debug_slave_wrapper:the_nios_system_nios2_gen2_0_cpu_debug_slave_wrapper|nios_system_nios2_gen2_0_cpu_debug_slave_tck:the_nios_system_nios2_gen2_0_cpu_debug_slave_tck|DRsize
+Name DRsize.101 DRsize.100 DRsize.011 DRsize.010 DRsize.001 DRsize.000 
+DRsize.000 0 0 0 0 0 0 
+DRsize.001 0 0 0 0 1 1 
+DRsize.010 0 0 0 1 0 1 
+DRsize.011 0 0 1 0 0 1 
+DRsize.100 0 1 0 0 0 1 
+DRsize.101 1 0 0 0 0 1 

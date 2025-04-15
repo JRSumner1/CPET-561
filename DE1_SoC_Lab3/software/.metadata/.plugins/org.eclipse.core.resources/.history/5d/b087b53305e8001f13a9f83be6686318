@@ -1,0 +1,106 @@
+#include <stdint.h>
+#include "system.h"           // Must contain definitions like KEY_PIO_BASE, SW_PIO_BASE, HEX0_BASE, etc.
+#include "sys/alt_irq.h"      // For alt_ic_isr_register
+
+/****************************************************************************
+ * 1) DEFINE PIO REGISTER OFFSETS & ACCESS MACROS
+ ****************************************************************************/
+#define PIO_DATA_OFFSET       0   // word offset = 0
+#define PIO_DIR_OFFSET        4   // word offset = 1
+#define PIO_IRQ_MASK_OFFSET   8   // word offset = 2
+#define PIO_EDGE_CAP_OFFSET   12  // word offset = 3
+
+// Generic macros for 32-bit access. For 8-bit, we can cast addresses to (volatile uint8_t*) instead.
+static inline uint32_t pio_read(const uint32_t base, uint32_t offset) {
+    return *((volatile uint32_t*)(base + offset));
+}
+
+static inline void pio_write(const uint32_t base, uint32_t offset, uint32_t data) {
+    *((volatile uint32_t*)(base + offset)) = data;
+}
+
+/****************************************************************************
+ * 2) 7-SEG DECODE TABLE FOR DIGITS 0..9
+ * Adjust if your hardware wiring is different.
+ ****************************************************************************/
+static const uint8_t seven_seg_table[10] = {
+    0x3F, // 0: 0b0111111
+    0x06, // 1: 0b0000110
+    0x5B, // 2: 0b1011011
+    0x4F, // 3: 0b1001111
+    0x66, // 4: 0b1100110
+    0x6D, // 5: 0b1101101
+    0x7D, // 6: 0b1111101
+    0x07, // 7: 0b0000111
+    0x7F, // 8: 0b1111111
+    0x6F  // 9: 0b1101111
+};
+
+/****************************************************************************
+ * 3) GLOBALS
+ ****************************************************************************/
+volatile int g_count = 0; // current digit to display
+
+/****************************************************************************
+ * 4) PUSHBUTTON ISR
+ ****************************************************************************/
+static void key_ISR(void* context)
+{
+    // (A) CLEAR the edge capture so it doesn't keep firing.
+    pio_write(KEY_PIO_BASE, PIO_EDGE_CAP_OFFSET, 0);
+
+    // (B) Read SW0 (bit 0 of SW_PIO)
+    uint32_t sw_value = pio_read(SW_PIO_BASE, PIO_DATA_OFFSET);
+    int sw0 = (sw_value & 0x01) ? 1 : 0;
+
+    // (C) Adjust g_count based on SW0
+    if (sw0) {
+        // Increment if < 9
+        if (g_count < 9) {
+            g_count++;
+        }
+    } else {
+        // Decrement if > 0
+        if (g_count > 0) {
+            g_count--;
+        }
+    }
+
+    // (D) Update HEX0
+    uint8_t seg_code = seven_seg_table[g_count];
+    *((volatile uint8_t*)HEX0_BASE) = seg_code;
+}
+
+/****************************************************************************
+ * 5) MAIN
+ ****************************************************************************/
+int main(void)
+{
+    // 1) Initialize the display to 0
+    g_count = 0;
+    *((volatile uint8_t*)HEX0_BASE) = seven_seg_table[g_count];
+
+    // 2) Clear any pending edge-capture on KEY PIO
+    pio_write(KEY_PIO_BASE, PIO_EDGE_CAP_OFFSET, 0);
+
+    // 3) Enable IRQ for KEY1 only.
+    //    If KEY1 is bit 1, then mask = 0x2.
+    //    If you want all 4 keys, use 0xF (for 4 bits).
+    pio_write(KEY_PIO_BASE, PIO_IRQ_MASK_OFFSET, 0x02);
+
+    // 4) REGISTER the ISR
+    alt_ic_isr_register(
+        KEY_PIO_IRQ_INTERRUPT_CONTROLLER_ID,
+        KEY_PIO_IRQ,
+        key_ISR,
+        NULL,
+        NULL
+    );
+
+    // 5) Main loop does nothing; all logic is in the ISR
+    while (1) {
+        // Idle or do other tasks
+    }
+
+    return 0;
+}

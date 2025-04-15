@@ -1,0 +1,63 @@
+#include "system.h"            // Definitions from BSP (addresses, etc.)
+#include <stdio.h>
+
+#define HEX0_BASE  // from system.h
+#define KEY_PIO_BASE  // from system.h
+#define SW_PIO_BASE   // from system.h
+
+int main(void)
+{
+    int count = 0;  // value to display on HEX0
+    // Initialize HEX0 to 0
+    IOWR_ALTERA_AVALON_PIO_DATA(HEX0_BASE, /*some pattern for '0'*/);
+
+    while (1)
+    {
+        // read the 4-bit keys
+        int keys = IORD_ALTERA_AVALON_PIO_DATA(KEY_PIO_BASE);
+        // key1 is bit 1 if we assume KEY0 -> bit0, KEY1 -> bit1, etc.
+        // If key1 is pressed => keys[1] == 0, because active low
+
+        if ((keys & 0x2) == 0) { // means KEY1 is pressed
+            // read SW (SW0 is bit 0)
+            int sw = IORD_ALTERA_AVALON_PIO_DATA(SW_PIO_BASE) & 0x1;
+            if (sw) {
+                // increment if not above 9
+                if (count < 9) count++;
+            } else {
+                // decrement if not below 0
+                if (count > 0) count--;
+            }
+
+            // update HEX0 with new value
+            // You either use a lookup table or a function that converts
+            // 0-9 to the 7-seg pattern
+            IOWR_ALTERA_AVALON_PIO_DATA(HEX0_BASE, seven_seg_decode(count));
+
+            // Wait until key1 is released
+            while ((IORD_ALTERA_AVALON_PIO_DATA(KEY_PIO_BASE) & 0x2) == 0);
+        }
+    }
+    return 0;
+}
+
+unsigned char seven_seg_decode(int digit)
+{
+    // Return the 7-bit pattern for the given digit [0..9]
+    // This depends on how the HEX0 PIO lines are mapped to segments
+    // For example, assume {HEX0[6:0]} = {g,f,e,d,c,b,a}
+    // A typical 7-seg table for digits 0-9 might be:
+    static unsigned char seg7[10] = {
+        0x3F, // 0
+        0x06, // 1
+        0x5B, // 2
+        0x4F, // 3
+        0x66, // 4
+        0x6D, // 5
+        0x7D, // 6
+        0x07, // 7
+        0x7F, // 8
+        0x6F  // 9
+    };
+    return seg7[digit];
+}

@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Wed Jan 22 10:57:12 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : lightsNoNios
+Top-level Entity Name : lightsNoNios
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 29
+Total pins : 15
+Total virtual pins : 0
+Total block memory bits : 0
+Total DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

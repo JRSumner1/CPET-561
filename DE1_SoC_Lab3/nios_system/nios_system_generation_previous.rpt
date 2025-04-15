@@ -1,0 +1,82 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate D:\Documents\CPET_561\DE1_SoC_Lab3\nios_system.qsys --block-symbol-file --output-directory=D:\Documents\CPET_561\DE1_SoC_Lab3\nios_system --family="Cyclone V" --part=5CSEMA5F31C6
+Progress: Loading DE1_SoC_Lab3/nios_system.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding hex0 [altera_avalon_pio 18.1]
+Progress: Parameterizing module hex0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 18.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding leds [altera_avalon_pio 18.1]
+Progress: Parameterizing module leds
+Progress: Adding nios2_gen2_0 [altera_nios2_gen2 18.1]
+Progress: Parameterizing module nios2_gen2_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding pushbuttons [altera_avalon_pio 18.1]
+Progress: Parameterizing module pushbuttons
+Progress: Adding switches [altera_avalon_pio 18.1]
+Progress: Parameterizing module switches
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 18.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding timer_0 [altera_avalon_timer 18.1]
+Progress: Parameterizing module timer_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: nios_system.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: nios_system.pushbuttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: nios_system.switches: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: nios_system.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: nios_system.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate D:\Documents\CPET_561\DE1_SoC_Lab3\nios_system.qsys --synthesis=VHDL --output-directory=D:\Documents\CPET_561\DE1_SoC_Lab3\nios_system\synthesis --family="Cyclone V" --part=5CSEMA5F31C6
+Progress: Loading DE1_SoC_Lab3/nios_system.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding hex0 [altera_avalon_pio 18.1]
+Progress: Parameterizing module hex0
+Progress: Adding jtag_uart_0 [altera_avalon_jtag_uart 18.1]
+Progress: Parameterizing module jtag_uart_0
+Progress: Adding leds [altera_avalon_pio 18.1]
+Progress: Parameterizing module leds
+Progress: Adding nios2_gen2_0 [altera_nios2_gen2 18.1]
+Progress: Parameterizing module nios2_gen2_0
+Progress: Adding onchip_memory2_0 [altera_avalon_onchip_memory2 18.1]
+Progress: Parameterizing module onchip_memory2_0
+Progress: Adding pushbuttons [altera_avalon_pio 18.1]
+Progress: Parameterizing module pushbuttons
+Progress: Adding switches [altera_avalon_pio 18.1]
+Progress: Parameterizing module switches
+Progress: Adding sysid_qsys_0 [altera_avalon_sysid_qsys 18.1]
+Progress: Parameterizing module sysid_qsys_0
+Progress: Adding timer_0 [altera_avalon_timer 18.1]
+Progress: Parameterizing module timer_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: nios_system.jtag_uart_0: JTAG UART IP input clock need to be at least double (2x) the operating frequency of JTAG TCK on board
+Info: nios_system.pushbuttons: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: nios_system.switches: PIO inputs are not hardwired in test bench. Undefined values will be read from PIO inputs during simulation.
+Info: nios_system.sysid_qsys_0: System ID is not assigned automatically. Edit the System ID parameter to provide a unique ID
+Info: nios_system.sysid_qsys_0: Time stamp will be automatically updated when this component is generated.
+Info: nios_system: Generating nios_system "nios_system" for QUARTUS_SYNTH
+Info: hex0: Starting RTL generation for module 'nios_system_hex0'
+Info: hex0:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_pio/generate_rtl.pl --name=nios_system_hex0 --dir=C:/Users/impos/AppData/Local/Temp/alt0129_822476831546063953.dir/0029_hex0_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/impos/AppData/Local/Temp/alt0129_822476831546063953.dir/0029_hex0_gen//nios_system_hex0_component_configuration.pl  --do_build_sim=0  ]
+Info: hex0: Done RTL generation for module 'nios_system_hex0'
+Info: hex0: "nios_system" instantiated altera_avalon_pio "hex0"
+Info: jtag_uart_0: Starting RTL generation for module 'nios_system_jtag_uart_0'
+Info: jtag_uart_0:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_jtag_uart/generate_rtl.pl --name=nios_system_jtag_uart_0 --dir=C:/Users/impos/AppData/Local/Temp/alt0129_822476831546063953.dir/0030_jtag_uart_0_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/impos/AppData/Local/Temp/alt0129_822476831546063953.dir/0030_jtag_uart_0_gen//nios_system_jtag_uart_0_component_configuration.pl  --do_build_sim=0  ]
+Info: jtag_uart_0: Done RTL generation for module 'nios_system_jtag_uart_0'
+Info: jtag_uart_0: "nios_system" instantiated altera_avalon_jtag_uart "jtag_uart_0"
+Error: Generation stopped, 10 or more modules remaining
+Info: nios_system: Done "nios_system" with 13 modules, 3 files
+Error: qsys-generate failed with exit code 1: 1 Error, 0 Warnings
+Info: Stopping: Create HDL design files for synthesis

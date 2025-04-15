@@ -1,0 +1,7 @@
+
+State Machine - |DE1_SoC_Lab4|servo_controller:u0|fsm_state
+Name fsm_state.INT_LEFT fsm_state.INT_RIGHT fsm_state.SWEEP_LEFT fsm_state.SWEEP_RIGHT 
+fsm_state.SWEEP_RIGHT 0 0 0 0 
+fsm_state.SWEEP_LEFT 0 0 1 1 
+fsm_state.INT_RIGHT 0 1 0 1 
+fsm_state.INT_LEFT 1 0 0 1 
