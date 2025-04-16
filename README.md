@@ -3,7 +3,7 @@ Rochester Institute of Technology (RIT)
 
 ## Overview
 Hands‑on projects that introduce hardware/software co‑design on the Intel Cyclone V‑SoC DE1‑SoC board.  
-Topics include Quartus‑based HDL design, Avalon bus arbitration, custom IP, ARM‑A9 bare‑metal C, audio processing, timing analysis, and signal‑tap debugging.
+Topics include Quartus‑based HDL design, Avalon bus arbitration, custom IP, C, audio processing, timing analysis, and signal‑tap debugging.
 
 ## Repository layout
 * DE1_SoC_Lab1 - Quartus starter design (LEDs / switches)
