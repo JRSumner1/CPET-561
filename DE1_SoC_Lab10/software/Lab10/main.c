@@ -1,121 +1,141 @@
 /*
- * main.c - Lab 10: Fun with Audio
- *
- *  Created on: Apr 15, 2025
- *      Author: Jon Sumner
- *  Based on audio_demo.c by jxciee
- */
+* main.c - Lab 10
+*
+*  Modified on: Apr 15, 2025
+*      Author: Jon Sumner
+*/
 
 #include "alt_types.h"
-#include "altera_avalon_timer.h"
-#include "altera_avalon_timer_regs.h"
 #include "altera_up_avalon_audio.h"
-#include "io.h"
-#include "math.h"
 #include "sys/alt_irq.h"
 #include "system.h"
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 
-// create standard embedded type definitions
-typedef signed char sint8;	   // signed 8 bit values
-typedef unsigned char uint8;   // unsigned 8 bit values
-typedef signed short sint16;   // signed 16 bit values
-typedef unsigned short uint16; // unsigned 16 bit values
-typedef signed long sint32;	   // signed 32 bit values
-typedef unsigned long uint32;  // unsigned 32 bit values
-typedef float real32;		   // 32 bit real values
+// Create standard embedded type definitions
+typedef signed char  sint8;    // signed 8-bit
+typedef unsigned char uint8;   // unsigned 8-bit
+typedef signed short sint16;   // signed 16-bit
+typedef unsigned short uint16; // unsigned 16-bit
+typedef signed long  sint32;   // signed 32-bit
+typedef unsigned long uint32;  // unsigned 32-bit
+typedef float        real32;   // 32-bit real
 
-// Global variables
-#define MAX_SAMPLES 0x80000 // 0x80000 max sample data (16 bits each) for SDRAM
-#define DELAY_SIZE     1024
+// ---------------------------------------------------------------------
+// Global constants, variables, and offsets
+// ---------------------------------------------------------------------
+#define MAX_SAMPLES   0x10000  // Max sample data (16 bits each) for SDRAM
+#define DELAY_SIZE    1024
+#define PIO_DATA_OFFSET       0
+#define PIO_IRQ_MASK_OFFSET   8
+#define PIO_EDGE_CAP_OFFSET   12
 
-volatile bool record_mode      = false;  // true while recording is active
-volatile bool playback_ready   = false;  // true when recording is complete, waiting for playback trigger
-volatile bool playback_mode    = false;  // true during playback
-volatile uint32 record_index   = 0;      // index for recording into SDRAM buffer
-volatile uint32 playback_index = 0;      // index for playback from SDRAM buffer
+// Record/playback control
+volatile bool   record_mode      = false;
+volatile bool   playback_ready   = false;
+volatile bool   playback_mode    = false;
+volatile uint32 record_index     = 0;
+volatile uint32 playback_index   = 0;
 
+// Buffers for delay/echo in Mode 5
 uint16 delay_buffer_left[DELAY_SIZE];
 uint16 delay_buffer_right[DELAY_SIZE];
-uint32 delay_idx = 0;  // circular index for delay buffer
+uint32 delay_idx = 0;  // Circular index for delay buffer
 
-// set up pointers to peripherals
+// ---------------------------------------------------------------------
+// Memory-mapped peripheral pointers
+// ---------------------------------------------------------------------
 uint16 *SdramPtr         = (uint16 *)NEW_SDRAM_CONTROLLER_0_BASE;
 uint32 *AudioPtr         = (uint32 *)AUDIO_0_BASE;
-uint32 *TimerPtr         = (uint32 *)TIMER_0_BASE;
-uint32 *PinPtr           = (uint32 *)PIN_BASE;
-uint32 *AudioVideoPtr    = (uint32 *)AUDIO_AND_VIDEO_CONFIG_0_BASE;
-uint16 *FilterPtr        = (uint16 *)AUDIO_FILTER_0_BASE;  // custom filter component registers
+uint16 *FilterPtr        = (uint16 *)AUDIO_FILTER_0_BASE;
 uint32 *KEYPtr           = (uint32 *)KEY_BASE;
 volatile uint32 *SWPtr   = (uint32 *)SW_BASE;
 uint32 *LEDRPtr          = (uint32 *)LEDR_BASE;
 
 volatile uint32 current_mode = 0;
 
+// ---------------------------------------------------------------------
+// Forward declarations for filter routines and inline functions
+// ---------------------------------------------------------------------
 uint16 process_lowpass(uint16 sample);
 uint16 process_highpass(uint16 sample);
 
+static inline uint32_t pio_read(uint32_t base, uint32_t offset)
+{
+    return *((volatile uint32_t *)(base + offset));
+}
+static inline void pio_write(uint32_t base, uint32_t offset, uint32_t value)
+{
+    *((volatile uint32_t *)(base + offset)) = value;
+}
+
+// ---------------------------------------------------------------------
+// Low-pass filter: Write sample to FilterPtr+1, read processed sample
+// ---------------------------------------------------------------------
 uint16 process_lowpass(uint16 sample)
 {
-    // For low pass filtering, assume writing the sample to FilterPtr+1
-    // and reading back the filtered sample from FilterPtr.
-    *(FilterPtr + 1) = sample;
-    return *FilterPtr;
+    *(FilterPtr + 1) = sample;   // Send sample to custom LPF
+    return *FilterPtr;           // Return filtered sample
 }
 
-//---------------------------------------------------------------------
-// process_highpass: feed sample to high-pass filter and return filtered result
-//---------------------------------------------------------------------
+// ---------------------------------------------------------------------
+// High-pass filter: Assume OR’ing the sample with 0x8000 selects HPF
+// ---------------------------------------------------------------------
 uint16 process_highpass(uint16 sample)
 {
-    // The mechanism for high pass filtering might involve setting a control
-    // bit. Here we assume that ORing the sample with 0x8000 selects high pass.
     *(FilterPtr + 1) = sample | 0x8000;
-    return *FilterPtr;
+    return *FilterPtr;                  
 }
 
+// ---------------------------------------------------------------------
+// Interrupt Service Routine for KEY presses
+//   KEY1 = bit1 in the KEY PIO
+//   Feature: Pressing KEY1 ends recording immediately (if in progress)
+//            and starts playback at once if samples are recorded
+// ---------------------------------------------------------------------
 void key_isr(void *context)
 {
-    // Read current KEY state; assume KEY1 is bit 1.
-    uint32 key_val = *KEYPtr;
+    // Read which key triggered the interrupt
+    uint32_t key_val = pio_read(KEY_BASE, PIO_EDGE_CAP_OFFSET);
+    // Clear the edge-capture by writing it back
+    pio_write(KEY_BASE, PIO_EDGE_CAP_OFFSET, key_val);
 
-    // If KEY1 pressed (bit 1 active) and playback is ready, start playback.
-    if ((key_val & 0x2) && playback_ready)
+    // Check if KEY1 (bit 1) was pressed
+    if (key_val & 0x2)
     {
-         playback_mode = true;
-         record_mode = false;
-         playback_index = 0;
-         printf("Playback started.\n");
-    }
+        // If we are currently recording, forcibly end the recording
+        if (record_mode)
+        {
+            record_mode    = false;
+            playback_ready = true;
+            printf("Recording forcibly ended by KEY1.\n");
+        }
 
-    // Clear KEY interrupt (platform-specific; may involve writing a 1 to the bit)
-    // Here we simply return.
-    return;
+        // If we have a valid recording (playback_ready == true),
+        // start playback right away
+        if (playback_ready)
+        {
+            playback_mode  = true;
+            playback_index = 0;
+            printf("Playback started.\n");
+        }
+    }
 }
 
-//---------------------------------------------------------------------
-// main: entry point for Lab 10 program.
-//---------------------------------------------------------------------
 int main(void)
 {
-    // Variables for audio samples (32-bit used in FIFO operations, though only 16 bits carry audio)
-    unsigned int l_buf = 0, r_buf = 0;
-    unsigned int out_left = 0, out_right = 0;
-    int fifospace = 0;
+    printf("Lab 10 Audio Program Running...\n");
 
-    printf("ESD-I Lab 10 Program Running.\n");
+    // Clear any pending edge captures and enable interrupt on KEY1 if needed
+    pio_write(KEY_BASE, PIO_EDGE_CAP_OFFSET, 0);
+    // For KEY1 interrupt, you might need 0x2. If your hardware is set for KEY0, use 0x1, etc.
+    pio_write(KEY_BASE, PIO_IRQ_MASK_OFFSET, 0x2);
 
-    // Register KEY interrupt (if your system supports KEY IRQ interrupts)
+    // Register the key_isr
     alt_ic_isr_register(KEY_IRQ_INTERRUPT_CONTROLLER_ID, KEY_IRQ, key_isr, 0, 0);
 
-    // Optionally, you could also register switch interrupts. For simplicity, we poll SW.
-    // Turn off all LEDs initially.
-    *LEDRPtr = 0x00;
-
-    // Open audio device using the Altera University audio core.
-    alt_up_audio_dev *audio_dev;
-    audio_dev = alt_up_audio_open_dev("/dev/audio_0");
+    alt_up_audio_dev *audio_dev = alt_up_audio_open_dev("/dev/audio_0");
     if (audio_dev == NULL)
     {
         printf("Error: could not open audio device\n");
@@ -126,144 +146,146 @@ int main(void)
         printf("Opened audio device.\n");
     }
 
-    // Initialize delay buffers for Mode 5 to zeros.
+    // Initialize the delay/echo buffers for Mode 5
     for (int i = 0; i < DELAY_SIZE; i++)
     {
-        delay_buffer_left[i] = 0;
+        delay_buffer_left[i]  = 0;
         delay_buffer_right[i] = 0;
     }
 
-    // Main processing loop:
+    // Main processing loop
     while (1)
     {
-        // Read the current mode from the slide switches (using lower 3 bits: SW2-SW0).
-        // Mode mapping:
-        //   0 -> Mode 1: Direct Echo
-        //   1 -> Mode 2: Low Pass Filter
-        //   2 -> Mode 3: High Pass Filter
-        //   3 -> Mode 4: Record/Playback
-        //   4 -> Mode 5: Delay/Echo effect
+        // Read mode from SW2–SW0
+        //  Mode 0 -> Microphone -> Speaker
+        //  Mode 1 -> Low Pass Filter
+        //  Mode 2 -> High Pass Filter
+        //  Mode 3 -> Record/Playback
+        //  Mode 4 -> Echo/Delay
         current_mode = *SWPtr & 0x07;
 
-        // Get available FIFO space for right channel (assumes audio samples for both channels are available).
-        fifospace = alt_up_audio_read_fifo_avail(audio_dev, ALT_UP_AUDIO_RIGHT);
+        // Check how many words in the input FIFO
+        int fifospace = alt_up_audio_read_fifo_avail(audio_dev, ALT_UP_AUDIO_RIGHT);
         if (fifospace > 0)
         {
-            // Read samples from both channels.
+            unsigned int l_buf = 0, r_buf = 0;
+            unsigned int out_left = 0, out_right = 0;
+
+            // Read one sample from each channel
             alt_up_audio_read_fifo(audio_dev, &r_buf, 1, ALT_UP_AUDIO_RIGHT);
             alt_up_audio_read_fifo(audio_dev, &l_buf, 1, ALT_UP_AUDIO_LEFT);
 
-            // Process according to current mode.
+            // Process samples based on current_mode
             switch (current_mode)
             {
-                // Mode 1: Direct Echo
-                case 0:
-                    out_left  = l_buf;
-                    out_right = r_buf;
-                    break;
-
-                // Mode 2: Low Pass Filter
+                // (Mode 1) Low Pass Filter
                 case 1:
-                    out_left  = process_lowpass(l_buf);
-                    out_right = process_lowpass(r_buf);
+                    *LEDRPtr = 0x01;  // For visual debugging
+                    out_left  = process_lowpass((uint16)l_buf);
+                    out_right = process_lowpass((uint16)r_buf);
                     break;
 
-                // Mode 3: High Pass Filter
+                // (Mode 2) High Pass Filter
                 case 2:
-                    out_left  = process_highpass(l_buf);
-                    out_right = process_highpass(r_buf);
+                    *LEDRPtr = 0x02;
+                    out_left  = process_highpass((uint16)l_buf);
+                    out_right = process_highpass((uint16)r_buf);
                     break;
 
-                // Mode 4: Record and Playback
+                // (Mode 3) Record/Playback
                 case 3:
+                {
+                    *LEDRPtr = 0x04;
+
                     if (!playback_mode)
                     {
-                        // Begin recording if not already recording.
+                        // If not currently playback_mode, we must be in recording
                         if (!record_mode)
                         {
-                            record_mode = true;
-                            playback_ready = false;
-                            record_index = 0;
-                            *LEDRPtr = 0x0F;  // Turn on red LEDs while recording.
+                            record_mode      = true;
+                            playback_ready   = false;
+                            record_index     = 0;
                             printf("Recording started.\n");
                         }
-                        // In recording mode: store stereo samples in SDRAM.
-                        if (record_mode)
+
+                        // Continue recording if space remains
+                        if (record_mode && (record_index < (MAX_SAMPLES - 2)))
                         {
-                            // Store left and right samples. (Increase index by 2 per stereo frame)
-                            if (record_index < (MAX_SAMPLES - 2))
-                            {
-                                SdramPtr[record_index++] = (uint16)l_buf;
-                                SdramPtr[record_index++] = (uint16)r_buf;
-                                // Do not output live sound during recording:
-                                out_left  = 0;
-                                out_right = 0;
-                            }
-                            else
-                            {
-                                // Recording complete: turn off LED and enable playback trigger.
-                                record_mode = false;
-                                playback_ready = true;
-                                *LEDRPtr = 0x00;
-                                printf("Recording complete. Press KEY1 to playback.\n");
-                                out_left  = 0;
-                                out_right = 0;
-                            }
+                            // For demonstration, uncomment to see progress:
+                            // printf("Still recording...\n");
+                            SdramPtr[record_index++] = (uint16)l_buf;
+                            SdramPtr[record_index++] = (uint16)r_buf;
+                            // Mute output during recording
+                            out_left  = 0;
+                            out_right = 0;
+                        }
+                        else if (record_mode)
+                        {
+                            // Done recording because we've hit the buffer limit
+                            record_mode      = false;
+                            playback_ready   = true;
+                            printf("Recording complete. Press KEY1 to playback.\n");
+                            out_left  = 0;
+                            out_right = 0;
                         }
                     }
-                    else  // Playback mode active.
+                    else
                     {
+                        // Currently in playback_mode
                         if (playback_index < record_index)
                         {
-                            // Playback stored samples (assumes stereo stored as two consecutive words).
                             out_left  = SdramPtr[playback_index++];
                             out_right = SdramPtr[playback_index++];
                         }
                         else
                         {
-                            // Playback finished; reset indices and state.
-                            playback_mode = false;
-                            record_mode = false;
+                            // Done playing
+                            playback_mode  = false;
                             playback_ready = false;
-                            record_index = 0;
+                            record_index   = 0;
                             playback_index = 0;
-                            out_left  = 0;
-                            out_right = 0;
+                            out_left       = 0;
+                            out_right      = 0;
                             printf("Playback finished.\n");
                         }
                     }
-                    break;
+                }
+                break;
 
-                // Mode 5: Student Concept (Delayed/Echo effect)
+                // (Mode 4) Delay/Echo
                 case 4:
-                    {
-                        // Get delayed samples from the delay buffer.
-                        uint16 delayed_left  = delay_buffer_left[delay_idx];
-                        uint16 delayed_right = delay_buffer_right[delay_idx];
-                        // Mix current sample with delayed sample (using a 0.5 attenuation factor).
-                        out_left  = l_buf + (delayed_left >> 1);
-                        out_right = r_buf + (delayed_right >> 1);
+                {
+                    *LEDRPtr = 0x08;
+                    // Retrieve old sample from delay buffer
+                    uint16 delayed_left  = delay_buffer_left[delay_idx];
+                    uint16 delayed_right = delay_buffer_right[delay_idx];
 
-                        // Store the current sample into the delay buffer.
-                        delay_buffer_left[delay_idx]  = (uint16)l_buf;
-                        delay_buffer_right[delay_idx] = (uint16)r_buf;
-                        // Update circular buffer index.
-                        delay_idx = (delay_idx + 1) % DELAY_SIZE;
-                    }
-                    break;
+                    // Simple echo: current + (delayed >> 1)
+                    out_left  = ((uint16)l_buf) + (delayed_left >> 1);
+                    out_right = ((uint16)r_buf) + (delayed_right >> 1);
 
-                // Default: Fallback to echo.
+                    // Store new sample in delay buffer
+                    delay_buffer_left[delay_idx]  = (uint16)l_buf;
+                    delay_buffer_right[delay_idx] = (uint16)r_buf;
+
+                    // Bump delay index (circular)
+                    delay_idx = (delay_idx + 1) % DELAY_SIZE;
+                }
+                break;
+
+                // (Mode 0) Microphone -> Speaker direct
                 default:
+                    *LEDRPtr = 0x00;
                     out_left  = l_buf;
                     out_right = r_buf;
                     break;
             }
 
-            // Write the processed samples out to the audio CODEC FIFOs.
+            // Write processed samples to CODEC (FIFO)
             alt_up_audio_write_fifo(audio_dev, &out_right, 1, ALT_UP_AUDIO_RIGHT);
             alt_up_audio_write_fifo(audio_dev, &out_left, 1, ALT_UP_AUDIO_LEFT);
         }
-    }  // end while(1)
+    }
 
     return 0;
 }

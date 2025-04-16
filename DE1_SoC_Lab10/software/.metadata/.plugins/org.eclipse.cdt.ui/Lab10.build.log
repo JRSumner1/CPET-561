@@ -1,18 +1,9 @@
-20:35:01 **** Incremental Build of configuration Nios II for project Lab10 ****
+13:38:29 **** Incremental Build of configuration Nios II for project Lab10 ****
 make all 
 Info: Building ../Lab10_bsp/
-C:/intelFPGA_lite/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Lab10_bsp/
+C:/intelFPGA/18.1/nios2eds/bin/gnu/H-x86_64-mingw32/bin/make --no-print-directory -C ../Lab10_bsp/
 [BSP build complete]
-Info: Compiling main.c to obj/default/main.o
-nios2-elf-gcc -xc -MP -MMD -c -I../Lab10_bsp//HAL/inc -I../Lab10_bsp/ -I../Lab10_bsp//drivers/inc  -pipe -D__hal__ -DALT_NO_INSTRUCTION_EMULATION -DALT_SINGLE_THREADED    -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o obj/default/main.o main.c
-Info: Linking Lab10.elf
-nios2-elf-g++  -T'../Lab10_bsp//linker.x' -msys-crt0='../Lab10_bsp//obj/HAL/src/crt0.o' -msys-lib=hal_bsp -L../Lab10_bsp/   -Wl,-Map=Lab10.map   -O0 -g -Wall   -mno-hw-div -mno-hw-mul -mno-hw-mulx -mgpopt=global  -o Lab10.elf obj/default/main.o -lm -msys-lib=m
-nios2-elf-insert Lab10.elf --thread_model hal --cpu_name nios2_gen2_0 --qsys true --simulation_enabled false --id 1 --sidp 0x4021080 --timestamp 1744761773 --stderr_dev jtag_uart_0 --stdin_dev jtag_uart_0 --stdout_dev jtag_uart_0 --sopc_system_name nios_system --quartus_project_dir "D:/Documents/RIT_Year_5/CPET-561/DE1_SoC_Lab10" --jdi ../..//output_files/DE1_SoC_Lab10.jdi --sopcinfo D:/Documents/RIT_Year_5/CPET-561/DE1_SoC_Lab10/software/Lab10_bsp/../../nios_system.sopcinfo
-Info: (Lab10.elf) 38 KBytes program size (code + initialized data).
-Info:             19 KBytes free for stack + heap.
-Info: Creating Lab10.objdump
-nios2-elf-objdump --disassemble --syms --all-header --source Lab10.elf >Lab10.objdump
 [Lab10 build complete]
 
-20:35:02 Build Finished (took 1s.468ms)
+13:38:30 Build Finished (took 1s.347ms)
 

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'nios_system'
  * SOPC Builder design path: ../../nios_system.sopcinfo
  *
- * Generated: Tue Apr 15 20:11:16 EDT 2025
+ * Generated: Wed Apr 16 13:37:15 EDT 2025
  */
 
 /*
@@ -249,7 +249,7 @@
 
 #define ALT_MODULE_CLASS_jtag_uart_0 altera_avalon_jtag_uart
 #define JTAG_UART_0_BASE 0x4021088
-#define JTAG_UART_0_IRQ 2
+#define JTAG_UART_0_IRQ 3
 #define JTAG_UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_0_NAME "/dev/jtag_uart_0"
 #define JTAG_UART_0_READ_DEPTH 64
@@ -267,20 +267,20 @@
 
 #define ALT_MODULE_CLASS_key altera_avalon_pio
 #define KEY_BASE 0x4021020
-#define KEY_BIT_CLEARING_EDGE_REGISTER 0
+#define KEY_BIT_CLEARING_EDGE_REGISTER 1
 #define KEY_BIT_MODIFYING_OUTPUT_REGISTER 0
-#define KEY_CAPTURE 0
+#define KEY_CAPTURE 1
 #define KEY_DATA_WIDTH 4
 #define KEY_DO_TEST_BENCH_WIRING 0
 #define KEY_DRIVEN_SIM_VALUE 0
-#define KEY_EDGE_TYPE "NONE"
+#define KEY_EDGE_TYPE "RISING"
 #define KEY_FREQ 50000000
 #define KEY_HAS_IN 1
 #define KEY_HAS_OUT 0
 #define KEY_HAS_TRI 0
-#define KEY_IRQ -1
-#define KEY_IRQ_INTERRUPT_CONTROLLER_ID -1
-#define KEY_IRQ_TYPE "NONE"
+#define KEY_IRQ 1
+#define KEY_IRQ_INTERRUPT_CONTROLLER_ID 0
+#define KEY_IRQ_TYPE "EDGE"
 #define KEY_NAME "/dev/key"
 #define KEY_RESET_VALUE 0
 #define KEY_SPAN 16
@@ -427,7 +427,7 @@
 #define SW_HAS_IN 1
 #define SW_HAS_OUT 0
 #define SW_HAS_TRI 0
-#define SW_IRQ 1
+#define SW_IRQ 2
 #define SW_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define SW_IRQ_TYPE "EDGE"
 #define SW_NAME "/dev/sw"
@@ -448,7 +448,7 @@
 #define SYSID_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define SYSID_NAME "/dev/sysid"
 #define SYSID_SPAN 8
-#define SYSID_TIMESTAMP 1744761773
+#define SYSID_TIMESTAMP 1744824763
 #define SYSID_TYPE "altera_avalon_sysid_qsys"
 
 
