@@ -1,17 +1,12 @@
-Analysis & Synthesis Status : Successful - Tue Apr 15 15:49:58 2025
-Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Analysis & Elaboration Status : Successful - Tue Apr 15 19:49:57 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : DE1_SoC_Lab9
 Top-level Entity Name : DE1_SoC_Lab9
 Family : Cyclone V
-Logic utilization (in ALMs) : N/A
-Total registers : 2154
-Total pins : 106
-Total virtual pins : 0
-Total block memory bits : 543,872
-Total DSP Blocks : 16
-Total HSSI RX PCSs : 0
-Total HSSI PMA RX Deserializers : 0
-Total HSSI TX PCSs : 0
-Total HSSI PMA TX Serializers : 0
-Total PLLs : 1
-Total DLLs : 0
+Logic utilization (in ALMs) : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total block memory bits : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
+Total DLLs : N/A until Partition Merge
