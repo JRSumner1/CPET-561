@@ -33,7 +33,6 @@ Everything targets the **Intel/Altera DE1-SoC** board (Cyclone V 5CSEMA5F31C6 FP
 | **Platform Designer / Qsys** | 18.1 | Avalon-MM system construction |
 | **ModelSim-Intel Edition** | 10.5b | VHDL simulation & test-benches |
 | **Nios II SBT (Eclipse)** | 21.1 | C/C++ BSP generation, ELF download |
-| **Python + Excel** | — | FIR-filter coefficient verification (Labs 8-9) |
 
 ---
 
