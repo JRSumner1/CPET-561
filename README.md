@@ -93,7 +93,21 @@ CPET-561/
 ---
 
 ## Building & Programming
-1. **Clone**  
+1. **Clone**
    ```bash
    git clone https://github.com/JRSumner1/CPET-561.git
    cd CPET-561
+   ```
+2. Choose a lab or demo folder and open the Quartus project.
+3. Generate HDL in Platform Designer (nios_system → Generate).
+4. Compile & Program
+   * Run Quartus compilation, then use the Programmer to load *.sof.
+   * In Nios II SBT build the matching *.elf, then Run → Hardware.
+5. Verification
+   * ModelSim test benches live in each lab’s sim/ directory.
+   * Labs 8-10 export CSVs you can plot in Excel.   
+
+---
+
+## Contributing
+Jonathan Sumner – JRSumner1
