@@ -19,10 +19,8 @@ Everything targets the **Intel/Altera DE1-SoC** board (Cyclone V 5CSEMA5F31C6 FP
 ## Hardware
 | Part | Purpose |
 |------|---------|
-| **DE1-SoC board** (Cyclone V FPGA + HPS) | Central development platform |
-| **24-bit Audio CODEC** + on-board MIC / 3.5 mm line-in/out | Real-time audio capture & playback |
+| **DE1-SoC Development Kit** (Cyclone V FPGA) | Central development platform |
 | **HiTec HS-311 Servo** | PWM-controlled actuator for Labs 4-5 |
-| **User I/O** (SW\[9:0], KEY\[3:0], HEX Displays, LEDs) | Interface for polling/interrupt exercises |
 
 ---
 
