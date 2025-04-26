@@ -28,9 +28,8 @@ Everything targets the **Intel/Altera DE1-SoC** board (Cyclone V 5CSEMA5F31C6 FP
 | Tool | Version | Notes |
 |------|---------|-------|
 | **Quartus Prime Lite** | 18.1 | Synthesis, pin-planning, and device programming |
-| **Platform Designer / Qsys** | 18.1 | Avalon-MM system construction |
 | **ModelSim-Intel Edition** | 10.5b | VHDL simulation & test-benches |
-| **Nios II SBT (Eclipse)** | 21.1 | C/C++ BSP generation, ELF download |
+| (Optional) **VS Code** | 1.99 | Write VHDL and C Code with the VHDL and C/C++ Extension |
 
 ---
 
